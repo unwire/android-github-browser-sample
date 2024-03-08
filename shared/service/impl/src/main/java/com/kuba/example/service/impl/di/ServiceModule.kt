@@ -38,17 +38,16 @@ interface ServiceModule {
             }
             return Retrofit.Builder()
                     .baseUrl("https://api.github.com/")
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .addConverterFactory(ApiResultConverterFactory)
-                    .addCallAdapterFactory(ApiResultCallAdapterFactory)
                     .client(
                         OkHttpClient.Builder()
                                 .addInterceptor(loggingInterceptor)
                                 .build()
                     )
+                    .addCallAdapterFactory(ApiResultCallAdapterFactory)
+                    .addConverterFactory(ApiResultConverterFactory)
+                    .addConverterFactory(MoshiConverterFactory.create())
                     .build()
                     .create(GithubApi::class.java)
         }
-
     }
 }

@@ -8,6 +8,10 @@ android {
     namespace 'com.kuba.example.projects.impl'
     compileSdk 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         minSdk 32
 
@@ -31,13 +35,33 @@ android {
 }
 
 dependencies {
-    implementation libs.timber
-    implementation libs.dagger.hilt.android
-    ksp libs.dagger.hilt.compiler
+    api project(":features:projects:api")
+    api project(":features:users:api")
+    implementation project(":shared:service:api")
+    implementation project(":shared:navigation:api")
+    implementation project(":shared:dagger-conductor")
 
+    // Recyclerview convenience
+    implementation libs.groupie.viewbinding
+    implementation libs.groupie
+
+    // Core
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
+    implementation libs.timber
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.coroutines.android
+    implementation libs.coil
+
+    // DI
+    implementation libs.dagger.hilt.android
+    ksp libs.dagger.hilt.compiler
+    implementation libs.dagger.android
+    ksp libs.dagger.android.compiler
+
+
+    // Test
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

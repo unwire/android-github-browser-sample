@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation project(":shared:service:api")
+    api project(":shared:service:api")
 
     // Core
     implementation libs.androidx.core.ktx

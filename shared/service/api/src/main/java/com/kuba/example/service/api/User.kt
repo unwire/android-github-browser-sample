@@ -1,5 +1,9 @@
 package com.kuba.example.service.api
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     /**
      * User handle
@@ -9,4 +13,4 @@ data class User(
     val name: String?,
 
     val avatarUrl: String?
-)
+) : Parcelable

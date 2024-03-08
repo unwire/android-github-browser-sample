@@ -15,24 +15,24 @@ import retrofit2.http.Query
 interface GithubApi {
 
     @GET("users/{login}")
-    fun getUser(@Path("login") login: String): ApiResult<UserDTO, Unit>
+    suspend fun getUser(@Path("login") login: String): ApiResult<UserDTO, Unit>
 
     @GET("users/{login}/repos")
-    fun getRepos(@Path("login") login: String): ApiResult<List<RepoDTO>, Unit>
+    suspend fun getRepos(@Path("login") login: String): ApiResult<List<RepoDTO>, Unit>
 
     @GET("repos/{owner}/{name}")
-    fun getRepo(
+    suspend fun getRepo(
         @Path("owner") owner: String,
         @Path("name") name: String
     ): ApiResult<RepoDTO, Unit>
 
     @GET("repos/{owner}/{name}/contributors")
-    fun getContributors(
+    suspend fun getContributors(
         @Path("owner") owner: String,
         @Path("name") name: String
     ): ApiResult<List<ContributorDTO>, Unit>
 
     @GET("search/repositories")
-    fun searchRepos(@Query("q") query: String): ApiResult<RepoSearchResponseDTO, Unit>
+    suspend fun searchRepos(@Query("q") query: String): ApiResult<RepoSearchResponseDTO, Unit>
 
 }

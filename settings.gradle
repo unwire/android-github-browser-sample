@@ -16,6 +16,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -28,3 +29,6 @@ include ':features:projects:impl'
 include ':features:projects:impl'
 include ':shared:service:api'
 include ':shared:service:impl'
+include ':shared:navigation:api'
+include ':shared:navigation:impl'
+include ':shared:dagger-conductor'

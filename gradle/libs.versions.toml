@@ -1,4 +1,5 @@
 [versions]
+javapoet = "1.13.0"
 targetSdk = "34"
 compileSdk = "34"
 kotlinJvmTarget = "17"
@@ -35,10 +36,12 @@ rxJavaProGuardRules = "1.1.6.0"
 rxAndroid2 = "2.1.1"
 rxRelay2 = "2.1.1"
 rxReplayingShare = "2.2.0"
+groupie = "2.10.1"
 timber = "4.7.1"
 retrofit = "2.9.0"
+coil = "2.6.0"
 eithernet = "1.2.1"
-dagger = "2.49"
+dagger = "2.51"
 jsr305 = "3.0.1"
 okHttp = "5.0.0-alpha.12"
 okio = "3.7.0"
@@ -52,8 +55,10 @@ androidxTest = "1.5.0"
 androidxTestExt = "1.1.5"
 turbine = "1.0.0"
 jetbrainsKotlinJvm = "1.9.0"
+activity = "1.8.0"
 
 [libraries]
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
@@ -72,6 +77,10 @@ navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fr
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "dagger" }
+dagger-android = { group = "com.google.dagger", name = "dagger-android", version.ref = "dagger" }
+dagger-android-compiler = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "dagger" }
+dagger-android-support = { group = "com.google.dagger", name = "dagger-android-support", version.ref = "dagger" }
+
 retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit2-moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 retrofit2-eithernet = { group = "com.slack.eithernet", name = "eithernet", version.ref = "eithernet" }
@@ -87,7 +96,12 @@ androidx-test-core = { group = "androidx.test", name = "core", version.ref = "an
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
-
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+conductor = { group = "com.bluelinelabs", name = "conductor", version.ref = "conductor" }
+conductor-lifecycle = { group = "com.bluelinelabs", name = "conductor-archlifecycle", version.ref = "conductor" }
+groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref = "groupie" }
+groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupie" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -95,3 +109,6 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
+
