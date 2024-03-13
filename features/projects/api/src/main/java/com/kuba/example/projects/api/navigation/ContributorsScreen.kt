@@ -7,7 +7,7 @@ import com.kuba.example.navigation.api.ControllerDestination
 import kotlinx.parcelize.Parcelize
 
 class ContributorsScreen(ownerLogin: String, repoName: String, repoDescription: String?) : ControllerDestination {
-    override val route: String = "repos/contributors"
+    override val route: String = ROUTE
     override val args: Bundle = Bundle().apply {
         putParcelable(KEY_ARGS, ContributorScreenArgs(ownerLogin, repoName, repoDescription))
     }
@@ -20,7 +20,8 @@ class ContributorsScreen(ownerLogin: String, repoName: String, repoDescription: 
 
         fun extractArgs(savedStateHandle: SavedStateHandle) = savedStateHandle.get<ContributorScreenArgs>(KEY_ARGS)!!
 
-        private const val KEY_ARGS = "key.args"
+        const val KEY_ARGS = "key.args"
+        const val ROUTE = "repos/contributors"
     }
 
     @Parcelize

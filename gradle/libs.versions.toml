@@ -56,6 +56,7 @@ androidxTestExt = "1.1.5"
 turbine = "1.0.0"
 jetbrainsKotlinJvm = "1.9.0"
 activity = "1.8.0"
+gson = "2.10.1"
 
 [libraries]
 javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
@@ -103,6 +104,7 @@ conductor-lifecycle = { group = "com.bluelinelabs", name = "conductor-archlifecy
 groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref = "groupie" }
 groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupie" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

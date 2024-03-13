@@ -66,6 +66,11 @@ dependencies {
 
     // Navigation
     implementation libs.conductor
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
+
+    // Serialization
+    implementation libs.gson
 
     // Features
     implementation project(":features:projects:impl")
