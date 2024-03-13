@@ -1,6 +1,7 @@
 package com.kuba.example.projects.impl.contributors
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,10 +11,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerContributorsBinding
 import com.kuba.example.service.api.User
+import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
@@ -56,7 +60,10 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
                     val itemClickListener: (user: User) -> Unit =
                         { user ->
                             Timber.d("Navigate to repository for user (login)... ${user.login}")
-                            // TODO: Navigate to user repositories screen
+                            val destination = UserRepositoriesScreen(user)
+                            val arguments = UserRepositoriesScreen.extractUser(destination.args)
+                            val encodedArguments = Uri.encode(Gson().toJson(arguments))
+                            findNavController().navigate("${destination.route}/$encodedArguments")
                         }
                     viewModel.state.collectLatest { uiModel ->
 

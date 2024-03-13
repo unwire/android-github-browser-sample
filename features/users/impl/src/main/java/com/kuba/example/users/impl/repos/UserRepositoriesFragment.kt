@@ -1,6 +1,7 @@
 package com.kuba.example.users.impl.repos
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,8 +11,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.gson.Gson
+import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.kuba.example.users.impl.R
 import com.kuba.example.users.impl.databinding.ControllerUserRepositoriesBinding
@@ -63,7 +67,14 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                     val itemClickListener: (repoOwnerLogin: String, repoName: String, repoDescription: String?) -> Unit =
                         { repoOwnerLogin, repoName, repoDescription ->
                             Timber.d("Navigate to contributors... $repoOwnerLogin/$repoName")
-                            // TODO: Navigate to contributors
+                            val destination = ContributorsScreen(
+                                ownerLogin = repoOwnerLogin,
+                                repoName = repoName,
+                                repoDescription = repoDescription
+                            )
+                            val arguments = ContributorsScreen.extractArgs(destination.args)
+                            val encodedArguments = Uri.encode(Gson().toJson(arguments))
+                            findNavController().navigate("${destination.route}/$encodedArguments")
                         }
                     viewModel.state.collectLatest { uiModel ->
 

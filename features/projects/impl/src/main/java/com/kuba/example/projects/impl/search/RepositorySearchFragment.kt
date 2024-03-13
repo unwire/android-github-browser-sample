@@ -1,5 +1,6 @@
 package com.kuba.example.projects.impl.search
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,6 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
+import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerRepositorySearchBinding
 import com.xwray.groupie.GroupAdapter
@@ -43,7 +47,14 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
                         { repoOwnerLogin, repoName, repoDescription ->
                             editQuery.clearFocus() // dismiss keyboard
                             Timber.d("Navigate to contributors... $repoOwnerLogin/$repoName")
-                            // TODO: Navigate to contributors screen
+                            val destination = ContributorsScreen(
+                                ownerLogin = repoOwnerLogin,
+                                repoName = repoName,
+                                repoDescription = repoDescription
+                            )
+                            val arguments = ContributorsScreen.extractArgs(destination.args)
+                            val encodedArguments = Uri.encode(Gson().toJson(arguments))
+                            findNavController().navigate("${destination.route}/$encodedArguments")
                         }
                     viewModel.state.collectLatest { uiModel ->
 
