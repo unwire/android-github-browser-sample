@@ -70,3 +70,8 @@ This includes the following changes
 - Adding logic to navigate to the new fragment 
 
 Estimation: 2 hours
+
+## Decision log
+
+- To wait for data load in the UI tests I considered two options: Idling resource which is an API Espresso provides to wait for asynchronous operations and replacing the Github service DI binding with a fake one. 
+Decided to go with the latter because it does not require adding test related code in the production source code and provides more control over the test (no risk for flaky tests).  
