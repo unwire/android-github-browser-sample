@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -58,6 +59,10 @@ dependencies {
     ksp libs.dagger.hilt.compiler
     implementation libs.dagger.android.support
     ksp libs.dagger.android.compiler
+
+    // Navigation
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
 
     // Test
     testImplementation libs.junit

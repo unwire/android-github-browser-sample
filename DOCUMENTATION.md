@@ -75,3 +75,5 @@ Estimation: 2 hours
 
 - To wait for data load in the UI tests I considered two options: Idling resource which is an API Espresso provides to wait for asynchronous operations and replacing the Github service DI binding with a fake one. 
 Decided to go with the latter because it does not require adding test related code in the production source code and provides more control over the test (no risk for flaky tests).  
+- We need a fragment per screen to build our navigation graph. To scope the ViewModels to fragments I decided to use `HiltViewModel` that takes care of injections without us needing to declare extra Dagger components.
+For that I created a new "Fragment" ViewModel for every screen. This extra ViewModel is not ideal but helps us avoid breaking the app while we add the navigation bits and pieces.
