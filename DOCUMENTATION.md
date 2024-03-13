@@ -11,9 +11,9 @@ Below is a high-level step-by-step plan for approaching the assignment:
 
 ### Step 1 - Preparation
 - [x] Fork of the repository
-- [ ] Run the code and see the features in action
-- [ ] Get familiar with the code
-- [ ] Read the tasks thoroughly and ask for clarifications if needed
+- [x] Run the code and see the features in action
+- [x] Get familiar with the code
+- [x] Read the tasks thoroughly and ask for clarifications if needed
 - [ ] Make a plan for how you want to approach every task - include an estimate for time-boxing. Include testing and documentation in the plan and the estimate
 
 ### Step 2 - Complete the main tasks
