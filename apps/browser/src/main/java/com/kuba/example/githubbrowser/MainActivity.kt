@@ -49,10 +49,10 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstanceState)
                 .setPopRootControllerMode(Router.PopRootControllerMode.NEVER)
 
-        if (!router.hasRootController()) {
-            val controller = controllerFactory.create(RepositorySearchScreen())
-            router.setRoot(RouterTransaction.with((controller)))
-        }
+//        if (!router.hasRootController()) {
+//            val controller = controllerFactory.create(RepositorySearchScreen())
+//            router.setRoot(RouterTransaction.with((controller)))
+//        }
 
         // Get a reference to the NavController for our NavHostFragment
         val navHostFragment =
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
                 }
             }
         }
-        // TODO: Set navigationGraph as navController.graph
+        navController.graph = navigationGraph
     }
 
     override fun onDestroy() {
