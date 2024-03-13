@@ -25,7 +25,6 @@ androidXAnnotation = "1.1.0"
 recyclerView = "1.2.1"
 gridLayout = "1.0.0"
 constraintLayout = "2.1.4"
-conductor = "3.1.9"
 navigation = "2.7.7"
 splashScreen = "1.0.1"
 dataStore = "1.0.0"
@@ -99,8 +98,6 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "a
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-conductor = { group = "com.bluelinelabs", name = "conductor", version.ref = "conductor" }
-conductor-lifecycle = { group = "com.bluelinelabs", name = "conductor-archlifecycle", version.ref = "conductor" }
 groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref = "groupie" }
 groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupie" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
@@ -113,5 +110,5 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 

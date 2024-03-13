@@ -26,7 +26,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class RepositorySearchFragment : Fragment(R.layout.controller_repository_search) {
 
-    private val viewModel: RepositorySearchFragmentViewModel by viewModels()
+    private val viewModel: RepositorySearchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -37,15 +37,6 @@ dependencies {
     implementation libs.androidx.core.ktx
     implementation libs.timber
 
-    // DI
-    implementation libs.dagger.hilt.android
-    ksp libs.dagger.hilt.compiler
-    implementation libs.dagger.android.support
-    ksp libs.dagger.android.compiler
-
-    // Navigation
-    implementation libs.conductor
-
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

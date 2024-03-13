@@ -40,7 +40,6 @@ dependencies {
     api project(":features:users:api")
     implementation project(":shared:service:api")
     implementation project(":shared:navigation:api")
-    implementation project(":shared:dagger-conductor")
 
     // Recyclerview convenience
     implementation libs.groupie.viewbinding

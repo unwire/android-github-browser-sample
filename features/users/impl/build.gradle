@@ -40,7 +40,6 @@ dependencies {
     implementation project(":features:projects:api")
     implementation project(":shared:navigation:api")
     implementation project(":shared:service:api")
-    implementation project(":shared:dagger-conductor")
 
     // Core
     implementation libs.androidx.core.ktx

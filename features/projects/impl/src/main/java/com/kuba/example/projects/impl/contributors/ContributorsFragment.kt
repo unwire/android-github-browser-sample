@@ -29,7 +29,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class ContributorsFragment : Fragment(R.layout.controller_contributors) {
 
-    private val viewModel: ContributorsFragmentViewModel by viewModels()
+    private val viewModel: ContributorsViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

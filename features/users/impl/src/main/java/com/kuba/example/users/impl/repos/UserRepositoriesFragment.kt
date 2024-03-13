@@ -30,7 +30,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories) {
 
-    private val viewModel: UserRepositoriesFragmentViewModel by viewModels()
+    private val viewModel: UserRepositoriesViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

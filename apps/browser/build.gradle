@@ -48,8 +48,7 @@ dependencies {
     implementation project(":features:projects:impl")
     implementation project(":features:users:impl")
     implementation project(":shared:service:impl")
-    implementation project(":shared:navigation:impl")
-    implementation project(":shared:dagger-conductor")
+    implementation project(":shared:navigation:api")
 
     // Core
     implementation libs.androidx.activity
@@ -65,7 +64,6 @@ dependencies {
     implementation libs.dagger.android
 
     // Navigation
-    implementation libs.conductor
     implementation libs.navigation.fragment.ktx
     implementation libs.navigation.ui.ktx
 

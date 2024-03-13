@@ -30,11 +30,6 @@ android {
 }
 
 dependencies {
-    // Navigation
-    api libs.conductor
-    api libs.conductor.lifecycle
-
-
     // DI
     implementation libs.dagger.hilt.android
 
