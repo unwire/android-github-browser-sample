@@ -8,6 +8,6 @@ import com.kuba.example.service.api.Repository
 sealed class RepositoriesUiModel {
 
     data class Content(val repositories: List<Repository>) : RepositoriesUiModel()
-
+    data object NoResults : RepositoriesUiModel()
     data class Error(val message: String) : RepositoriesUiModel()
 }

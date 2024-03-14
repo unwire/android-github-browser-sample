@@ -59,10 +59,12 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
                             findNavController().navigate("${destination.route}/$encodedArguments")
                         }
                     viewModel.state.collectLatest { uiModel ->
+                        lblError.isVisible = false
+                        rvRepositories.isVisible = false
 
                         when (uiModel) {
                             is RepositoriesUiModel.Content -> {
-                                lblError.isVisible = false
+                                rvRepositories.isVisible = true
                                 val items = uiModel.repositories.map {
                                     RepositoryItem(
                                         owner = it.ownerLogin,
@@ -79,6 +81,11 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
                             is RepositoriesUiModel.Error -> {
                                 lblError.isVisible = true
                                 lblError.text = uiModel.message
+                            }
+
+                            is RepositoriesUiModel.NoResults -> {
+                                lblError.isVisible = true
+                                lblError.text = getString(R.string.no_results_found)
                             }
                         }
                     }

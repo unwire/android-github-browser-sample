@@ -25,7 +25,14 @@ class RepositorySearchViewModel @Inject constructor(private val githubService: G
         } else {
             val result = githubService.searchRepos(query)
             when (result) {
-                is ServiceResult.Success -> RepositoriesUiModel.Content(result.value)
+                is ServiceResult.Success -> {
+                    if (result.value.isEmpty()) {
+                        RepositoriesUiModel.NoResults
+                    } else {
+                        RepositoriesUiModel.Content(result.value)
+                    }
+                }
+
                 is ServiceResult.Failure -> RepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
             }
         }
