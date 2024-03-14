@@ -1,7 +1,9 @@
 package com.kuba.example.githubbrowser
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -17,6 +19,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // Get a reference to the NavController for our NavHostFragment
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.findNavController()
+        navController = navHostFragment.findNavController()
 
         // Build a navigation graph including all the destinations in the app
         val navigationGraph = navController.createGraph(
@@ -40,6 +43,12 @@ class MainActivity : AppCompatActivity() {
             userDetailsDestination()
         }
         navController.graph = navigationGraph
+
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(enabled = true) {
+            override fun handleOnBackPressed() {
+                navController.navigateUp()
+            }
+        })
     }
 
     override fun onDestroy() {
