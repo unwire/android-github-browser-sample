@@ -28,7 +28,7 @@ class RepositorySearchViewModelTest {
         }
 
     @Test
-    fun verify_stateIsSetCorrectly_toSuccessWithNoData_when_GithubService_returns_anEmptyList() =
+    fun verify_stateIsSetCorrectly_toSuccessWithNoData_when_GithubService_returns_aNoResults() =
         runBlocking {
             // Given GithubService returns an empty list for a given query
             fakeGithubService.searchReposResult = ServiceResult.Success(emptyList())
@@ -37,7 +37,7 @@ class RepositorySearchViewModelTest {
             viewModel.search("Random repo that does not exist")
 
             // Then the state is set correctly with an empty list
-            assertEquals(RepositoriesUiModel.Content(emptyList()), viewModel.state.value)
+            assertEquals(RepositoriesUiModel.NoResults, viewModel.state.value)
         }
 
     @Test
