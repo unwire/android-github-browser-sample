@@ -3,7 +3,7 @@ javapoet = "1.13.0"
 targetSdk = "34"
 compileSdk = "34"
 kotlinJvmTarget = "17"
-kotlin = "1.9.20"
+kotlin = "1.9.22"
 agp = "8.3.0"
 ksp = "1.9.20-1.0.14"
 coroutines = "1.7.3"
@@ -56,6 +56,8 @@ turbine = "1.0.0"
 jetbrainsKotlinJvm = "1.9.0"
 activity = "1.8.0"
 gson = "2.10.1"
+compose-activity = "1.8.2"
+compose = "1.6.3"
 
 [libraries]
 javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
@@ -102,6 +104,10 @@ groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref
 groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupie" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
+compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
+compose-ui-material = { group = "androidx.compose.material", name = "material", version.ref = "compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

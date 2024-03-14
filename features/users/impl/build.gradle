@@ -33,6 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
 }
 
 dependencies {
@@ -41,6 +49,12 @@ dependencies {
     implementation project(":shared:navigation:api")
     implementation project(":shared:navigation:impl")
     implementation project(":shared:service:api")
+
+    // Compose UI
+    implementation libs.compose.activity
+    implementation libs.compose.ui
+    implementation libs.compose.ui.tooling.preview
+    implementation libs.compose.ui.material
 
     // Core
     implementation libs.androidx.core.ktx
