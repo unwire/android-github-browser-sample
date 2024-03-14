@@ -10,6 +10,7 @@ import com.kuba.example.projects.api.navigation.RepositorySearchScreen
 import com.kuba.example.projects.impl.contributors.contributorsDestination
 import com.kuba.example.projects.impl.search.repositorySearchDestination
 import com.kuba.example.users.impl.repos.userRepositoryDestination
+import com.kuba.example.users.impl.userdetails.userDetailsDestination
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             repositorySearchDestination()
             contributorsDestination()
             userRepositoryDestination()
+            userDetailsDestination()
         }
         navController.graph = navigationGraph
     }
