@@ -6,9 +6,10 @@ import com.kuba.example.service.api.ServiceResult
 import com.kuba.example.service.api.User
 import com.kuba.example.service.api.UserDetails
 
-class FakeGithubService: GithubService {
+class FakeGithubService : GithubService {
 
-    var searchReposResult: ServiceResult<List<Repository>> = ServiceResult.Success(listOf(fakeRepository))
+    var searchReposResult: ServiceResult<List<Repository>> =
+        ServiceResult.Success(listOf(fakeRepository))
 
     companion object {
         val fakeRepository = Repository(

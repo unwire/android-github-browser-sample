@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,55 +8,55 @@
     android:layout_marginBottom="8dp"
     android:foreground="?selectableItemBackground">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:padding="4dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
 
-    <ImageView
-        android:id="@+id/img_star"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/baseline_star_outline_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="?colorPrimary" />
+        <ImageView
+            android:id="@+id/img_star"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/baseline_star_outline_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?colorPrimary" />
 
-    <TextView
-        android:id="@+id/lbl_stars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="48dp"
-        android:layout_marginStart="4dp"
-        android:textAppearance="?textAppearanceBody1"
-        app:layout_constraintBottom_toBottomOf="@id/img_star"
-        app:layout_constraintStart_toEndOf="@id/img_star"
-        app:layout_constraintTop_toTopOf="@id/img_star"
-        tools:text="1245" />
+        <TextView
+            android:id="@+id/lbl_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:width="48dp"
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="@id/img_star"
+            app:layout_constraintStart_toEndOf="@id/img_star"
+            app:layout_constraintTop_toTopOf="@id/img_star"
+            tools:text="1245" />
 
-    <TextView
-        android:id="@+id/lbl_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textAppearance="?textAppearanceHeadline5"
-        app:layout_constraintBottom_toBottomOf="@id/img_star"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lbl_stars"
-        app:layout_constraintTop_toTopOf="@id/img_star"
-        tools:text="Repository A" />
+        <TextView
+            android:id="@+id/lbl_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceHeadline5"
+            app:layout_constraintBottom_toBottomOf="@id/img_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/lbl_stars"
+            app:layout_constraintTop_toTopOf="@id/img_star"
+            tools:text="Repository A" />
 
-    <TextView
-        android:id="@+id/lbl_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceBody1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_star"
-        tools:text="@tools:sample/lorem/random" />
+        <TextView
+            android:id="@+id/lbl_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_star"
+            tools:text="@tools:sample/lorem/random" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

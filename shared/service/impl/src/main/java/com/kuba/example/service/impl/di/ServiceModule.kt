@@ -22,7 +22,7 @@ import javax.inject.Singleton
 interface ServiceModule {
 
     @Binds
-    fun provideGithubService(real: RealGithubService) : GithubService
+    fun provideGithubService(real: RealGithubService): GithubService
 
     companion object {
 
@@ -37,17 +37,17 @@ interface ServiceModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }
             return Retrofit.Builder()
-                    .baseUrl("https://api.github.com/")
-                    .client(
-                        OkHttpClient.Builder()
-                                .addInterceptor(loggingInterceptor)
-                                .build()
-                    )
-                    .addCallAdapterFactory(ApiResultCallAdapterFactory)
-                    .addConverterFactory(ApiResultConverterFactory)
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-                    .create(GithubApi::class.java)
+                .baseUrl("https://api.github.com/")
+                .client(
+                    OkHttpClient.Builder()
+                        .addInterceptor(loggingInterceptor)
+                        .build()
+                )
+                .addCallAdapterFactory(ApiResultCallAdapterFactory)
+                .addConverterFactory(ApiResultConverterFactory)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+                .create(GithubApi::class.java)
         }
     }
 }

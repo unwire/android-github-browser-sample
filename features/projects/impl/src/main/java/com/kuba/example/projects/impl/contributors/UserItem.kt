@@ -8,7 +8,6 @@ import com.kuba.example.projects.impl.databinding.ItemContributorBinding
 import com.kuba.example.service.api.User
 import com.xwray.groupie.viewbinding.BindableItem
 import timber.log.Timber
-import kotlin.math.log
 
 data class UserItem(
     val user: User,

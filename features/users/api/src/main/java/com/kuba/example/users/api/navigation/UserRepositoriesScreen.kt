@@ -16,9 +16,10 @@ class UserRepositoriesScreen(user: User) : ControllerDestination {
         /**
          * Provide the [Bundle] set on the [Controller] to extract the [User]
          */
-        fun extractUser(args: Bundle) : User = args.getParcelable(KEY_USER)!!
+        fun extractUser(args: Bundle): User = args.getParcelable(KEY_USER)!!
 
-        fun extractUser(savedStateHandle: SavedStateHandle) : User = savedStateHandle.get<User>(KEY_USER)!!
+        fun extractUser(savedStateHandle: SavedStateHandle): User =
+            savedStateHandle.get<User>(KEY_USER)!!
 
         // User login handle
         const val KEY_USER = "key.user"
