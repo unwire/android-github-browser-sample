@@ -20,10 +20,14 @@ class RepositorySearchViewModel @Inject constructor(private val githubService: G
      * Search Github repositories
      */
     suspend fun search(query: String) {
-        val result = githubService.searchRepos(query)
-        val uiModel = when (result) {
-            is ServiceResult.Success -> RepositoriesUiModel.Content(result.value)
-            is ServiceResult.Failure -> RepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+        val uiModel = if (query.isBlank()) {
+            RepositoriesUiModel.Error("Provide a search query")
+        } else {
+            val result = githubService.searchRepos(query)
+            when (result) {
+                is ServiceResult.Success -> RepositoriesUiModel.Content(result.value)
+                is ServiceResult.Failure -> RepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+            }
         }
 
         _state.value = uiModel
