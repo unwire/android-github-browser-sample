@@ -3,7 +3,6 @@ package com.kuba.example.users.api.navigation
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import com.kuba.example.navigation.api.ControllerDestination
-import com.kuba.example.users.api.navigation.UserRepositoriesScreen.Companion.KEY_USER
 
 class UserDetailsScreen(userLogin: String) : ControllerDestination {
 
@@ -13,8 +12,9 @@ class UserDetailsScreen(userLogin: String) : ControllerDestination {
     }
 
     companion object {
+        fun extractUserLogin(bundle: Bundle): String = bundle.getString(KEY_USER_LOGIN)!!
         fun extractUserLogin(savedStateHandle: SavedStateHandle): String =
-            savedStateHandle.get<String>(KEY_USER)!!
+            savedStateHandle.get<String>(KEY_USER_LOGIN)!!
 
         // User login handle
         const val KEY_USER_LOGIN = "key.user_login"

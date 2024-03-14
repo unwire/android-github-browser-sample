@@ -16,6 +16,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.gson.Gson
 import com.kuba.example.projects.api.navigation.ContributorsScreen
+import com.kuba.example.users.api.navigation.UserDetailsScreen
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.kuba.example.users.impl.R
 import com.kuba.example.users.impl.databinding.ControllerUserRepositoriesBinding
@@ -59,7 +60,16 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                 }
             }
 
-            lblUserName.text = user.name ?: user.login
+            lblUserName.apply {
+                text = user.name ?: user.login
+                setOnClickListener {
+                    val destination = UserDetailsScreen(
+                        userLogin = user.login
+                    )
+                    val argument = UserDetailsScreen.extractUserLogin(destination.args)
+                    findNavController().navigate("${destination.route}/$argument")
+                }
+            }
 
             // Observe viewmodel state emissions
             viewLifecycleOwner.lifecycleScope.launch {
