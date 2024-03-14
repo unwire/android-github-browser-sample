@@ -33,13 +33,13 @@ Below is a high-level step-by-step plan for approaching the assignment:
 
 ### Step 3 - Tackle the bonus tasks
 
-- [ ] If the time permits tackle the bonus tasks. Otherwise write some documentation explaining how
+- [x] If the time permits tackle the bonus tasks. Otherwise write some documentation explaining how
   you would have approached them
 
 ### Step 4 - Finalise & submit
 
-- [ ] Read the description again and make sure you have completed all the tasks
-- [ ] Create a PR
+- [x] Read the description again and make sure you have completed all the tasks
+- [x] Create a PR
 
 ## Plan
 
@@ -89,6 +89,34 @@ This includes the following changes
 
 Estimation: 2 hours
 
+## Bonus tasks
+
+Below are the following bonus tasks I managed to complete:
+
+- Address usability issues:
+    - Hiding the keyboard when the user presses the search button.
+    - Displaying a "No results found" message when the search query yields no results.
+    - Fix the navigation backstack issue when navigating from contributor to repository to contributor.
+- Code cleanup:
+    - Removing unused resources and files.
+    - Organizing and rearranging imports.
+    - Future improvement: Adding a static code analyzer like Detekt to detect code smells and
+      automatically format code.
+- Creating a second app (`pink_browser`) with a different theme.
+
+And this is how I would approach the remaining tasks:
+
+- Creating another app with a subset of features:
+    - We can build a graph with a subset of destinations. Providing features with more context about
+      available features so they can adjust themselves accordingly can be achieved by passing
+      arguments to features, but there might be a more elegant solution.
+- Caching GitHub API data:
+    - This can be accomplished by introducing a repository layer for our features and a local data
+      source that persists the results received from the network. The repository fetches the results
+      from the network and caches them in the local data source the first time they are received.
+      Subsequent calls to the repository skip fetching the data from the API and return the cached
+      data from the local data source.
+
 ## Decision log
 
 - To wait for data load in the UI tests I considered two options: Idling resource which is an API
@@ -99,8 +127,9 @@ Estimation: 2 hours
 - We need a fragment per screen to build our navigation graph. To scope the ViewModels to fragments
   I decided to use `HiltViewModel` that takes care of injections without us needing to declare extra
   Dagger components.
-  For that I created a new "Fragment" ViewModel for every screen. This extra ViewModel is not ideal
-  but helps us avoid breaking the app while we add the navigation bits and pieces.
+  For that I created a new temporary ViewModel for every screen. This extra ViewModel is not ideal
+  but helps us avoid breaking the app while we add the navigation bits and pieces. This will later
+  replace the ViewModel once we remove all the conductor specific code.
 - I decided to move nav destination declarations to individual feature modules. This keeps the app
   module cleaner and enables us to expand destinations into nested graphs if needed in the future
   without touching the app(s).
@@ -110,11 +139,11 @@ Estimation: 2 hours
   an edge case (search called with an empty string).
 - Introduced a new `UserDetails` domain model that includes more details about a user. This will be
   mapped to a UI model in our new user details screen.
-- Decided to build the UI for user details screen in Compose to showcase my experience with it
+- Decided to build the UI for user details screen in Compose to showcase my experience with Compose UI.
 - Considered passing the data we have already fetched on the user (avatar, name and login) to the
   user details. That way user sees something some details about the user while we fetch the rest.
   But eventually decided to load all the details and display them in one go. There is a loading
   state (simple spinner) the user sees in the user details screen while the data loads.
 - Decided to fix the infinite forward navigation issue by clearing the backstack. An alternative I
   considered was disabling item click on the list of repositories. But decided not to do that as
-  that would have changed an functionality.
+  that would have changed a potentially useful functionality.
