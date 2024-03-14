@@ -9,7 +9,7 @@ sealed class UserDetailsUiModel {
 
     data object Loading : UserDetailsUiModel()
 
-    data class Content(val repositories: UserDetails) : UserDetailsUiModel()
+    data class Content(val userDetails: UserDetails) : UserDetailsUiModel()
 
     data class Error(val message: String) : UserDetailsUiModel()
 }
