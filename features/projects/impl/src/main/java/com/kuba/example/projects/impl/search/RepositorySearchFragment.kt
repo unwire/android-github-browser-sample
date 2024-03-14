@@ -1,8 +1,10 @@
 package com.kuba.example.projects.impl.search
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -85,10 +87,19 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
 
             btnSearch.setOnClickListener {
                 lifecycle.coroutineScope.launch {
+                    editQuery.clearFocus()
+                    editQuery.hideKeyboard()
+
                     val query: String = editQuery.text.toString()
                     viewModel.search(query)
                 }
             }
         }
+    }
+
+    private fun View.hideKeyboard() {
+        val inputMethodManager =
+            this.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
     }
 }
