@@ -1,12 +1,21 @@
-package com.kuba.example.githubbrowser
+package com.kuba.example.projects.impl.contributors
 
 import android.os.Bundle
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
+import androidx.navigation.fragment.fragment
 import com.google.gson.Gson
 import com.kuba.example.projects.api.navigation.ContributorsScreen
-import com.kuba.example.service.api.User
 
-val contributorScreenArgsType =
+fun NavGraphBuilder.contributorsDestination() {
+    fragment<ContributorsFragment>("${ContributorsScreen.ROUTE}/{${ContributorsScreen.KEY_ARGS}}") {
+        argument(ContributorsScreen.KEY_ARGS) {
+            type = contributorScreenArgsType
+        }
+    }
+}
+
+private val contributorScreenArgsType =
     object : NavType<ContributorsScreen.ContributorScreenArgs>(
         isNullableAllowed = false
     ) {
@@ -29,19 +38,3 @@ val contributorScreenArgsType =
             return Gson().fromJson(value, ContributorsScreen.ContributorScreenArgs::class.java)
         }
     }
-
-val userRepositoriesType = object : NavType<User>(
-    isNullableAllowed = false
-) {
-    override fun put(bundle: Bundle, key: String, value: User) {
-        bundle.putParcelable(key, value)
-    }
-
-    override fun get(bundle: Bundle, key: String): User? {
-        return bundle.getParcelable(key) as? User
-    }
-
-    override fun parseValue(value: String): User {
-        return Gson().fromJson(value, User::class.java)
-    }
-}

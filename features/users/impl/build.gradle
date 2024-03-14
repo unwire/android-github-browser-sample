@@ -39,6 +39,7 @@ dependencies {
     api project(":features:users:api")
     implementation project(":features:projects:api")
     implementation project(":shared:navigation:api")
+    implementation project(":shared:navigation:impl")
     implementation project(":shared:service:api")
 
     // Core
@@ -58,10 +59,6 @@ dependencies {
     ksp libs.dagger.hilt.compiler
     implementation libs.dagger.android.support
     ksp libs.dagger.android.compiler
-
-    // Navigation
-    implementation libs.navigation.fragment.ktx
-    implementation libs.navigation.ui.ktx
 
     // Serialization
     implementation libs.gson

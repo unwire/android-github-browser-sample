@@ -18,7 +18,7 @@ Below is a high-level step-by-step plan for approaching the assignment:
 
 ### Step 2 - Complete the main tasks
 - [ ] Complete the main tasks one by one based on the priority. Write tests and document decisions and assumptions as you go.
-    - [ ] Task 1 - Navigation Framework Refactoring
+    - [x] Task 1 - Navigation Framework Refactoring
     - [ ] Task 2 - Implement a Fake GithubService and ViewModel unit tests
     - [ ] Task 3 - Add a feature: User Details
 - [ ] Ensure all the requirements in the description are fulfilled before moving on to the bonus points
@@ -77,3 +77,4 @@ Estimation: 2 hours
 Decided to go with the latter because it does not require adding test related code in the production source code and provides more control over the test (no risk for flaky tests).  
 - We need a fragment per screen to build our navigation graph. To scope the ViewModels to fragments I decided to use `HiltViewModel` that takes care of injections without us needing to declare extra Dagger components.
 For that I created a new "Fragment" ViewModel for every screen. This extra ViewModel is not ideal but helps us avoid breaking the app while we add the navigation bits and pieces.
+- I decided to move nav destination declarations to individual feature modules. This keeps the app module cleaner and enables us to expand destinations into nested graphs if needed in the future without touching the app(s). 

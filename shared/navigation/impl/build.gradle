@@ -33,6 +33,10 @@ android {
 dependencies {
     api project(":shared:navigation:api")
 
+    // Navigation
+    api libs.navigation.fragment.ktx
+    api libs.navigation.ui.ktx
+
     // Core
     implementation libs.androidx.core.ktx
     implementation libs.timber

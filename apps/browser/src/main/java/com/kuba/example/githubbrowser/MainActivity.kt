@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.fragment
 import com.kuba.example.githubbrowser.databinding.ActivityMainBinding
-import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.api.navigation.RepositorySearchScreen
-import com.kuba.example.projects.impl.contributors.ContributorsFragment
-import com.kuba.example.projects.impl.search.RepositorySearchFragment
-import com.kuba.example.users.api.navigation.UserRepositoriesScreen
-import com.kuba.example.users.impl.repos.UserRepositoriesFragment
+import com.kuba.example.projects.impl.contributors.contributorsDestination
+import com.kuba.example.projects.impl.search.repositorySearchDestination
+import com.kuba.example.users.impl.repos.userRepositoryDestination
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -32,21 +29,13 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.findNavController()
 
-        // Build a navigation graph including all the screens in the app
+        // Build a navigation graph including all the destinations in the app
         val navigationGraph = navController.createGraph(
             startDestination = RepositorySearchScreen().route
         ) {
-            fragment<RepositorySearchFragment>(RepositorySearchScreen.ROUTE)
-            fragment<ContributorsFragment>("${ContributorsScreen.ROUTE}/{${ContributorsScreen.KEY_ARGS}}") {
-                argument(ContributorsScreen.KEY_ARGS) {
-                    type = contributorScreenArgsType
-                }
-            }
-            fragment<UserRepositoriesFragment>("${UserRepositoriesScreen.ROUTE}/{${UserRepositoriesScreen.KEY_USER}}") {
-                argument(UserRepositoriesScreen.KEY_USER) {
-                    type = userRepositoriesType
-                }
-            }
+            repositorySearchDestination()
+            contributorsDestination()
+            userRepositoryDestination()
         }
         navController.graph = navigationGraph
     }
