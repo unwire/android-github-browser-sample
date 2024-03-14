@@ -84,3 +84,4 @@ For that I created a new "Fragment" ViewModel for every screen. This extra ViewM
 - Decided to build the UI for user details screen in Compose to showcase my experience with it
 - Considered passing the data we have already fetched on the user (avatar, name and login) to the user details. That way user sees something some details about the user while we fetch the rest. 
 But eventually decided to load all the details and display them in one go. There is a loading state (simple spinner) the user sees in the user details screen while the data loads. 
+- Decided to fix the infinite forward navigation issue by clearing the backstack. An alternative I considered was disabling item click on the list of repositories. But decided not to do that as that would have changed an functionality.

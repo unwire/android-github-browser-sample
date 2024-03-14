@@ -11,11 +11,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.gson.Gson
 import com.kuba.example.projects.api.navigation.ContributorsScreen
+import com.kuba.example.projects.api.navigation.RepositorySearchScreen
 import com.kuba.example.users.api.navigation.UserDetailsScreen
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.kuba.example.users.impl.R
@@ -84,7 +86,12 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                             )
                             val arguments = ContributorsScreen.extractArgs(destination.args)
                             val encodedArguments = Uri.encode(Gson().toJson(arguments))
-                            findNavController().navigate("${destination.route}/$encodedArguments")
+                            findNavController().navigate(
+                                route = "${destination.route}/$encodedArguments",
+                                navOptions = NavOptions.Builder()
+                                    .setPopUpTo(RepositorySearchScreen.ROUTE, false)
+                                    .build()
+                            )
                         }
                     viewModel.state.collectLatest { uiModel ->
 
