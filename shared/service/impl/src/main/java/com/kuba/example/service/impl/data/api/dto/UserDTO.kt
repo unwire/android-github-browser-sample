@@ -6,9 +6,11 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class UserDTO(
     val login: String,
-
+    val name: String?,
+    val email: String?,
+    val followers: Int,
+    val following: Int,
+    val location: String?,
     @Json(name = "avatar_url")
-    val avatarUrl: String?,
-
-    val name: String?
+    val avatarUrl: String?
 )

@@ -4,6 +4,7 @@ import com.kuba.example.service.api.GithubService
 import com.kuba.example.service.api.Repository
 import com.kuba.example.service.api.ServiceResult
 import com.kuba.example.service.api.User
+import com.kuba.example.service.api.UserDetails
 import javax.inject.Inject
 
 class FakeGithubService @Inject constructor() : GithubService {
@@ -36,8 +37,8 @@ class FakeGithubService @Inject constructor() : GithubService {
         return ServiceResult.Success(contributors)
     }
 
-    override suspend fun getUserDetails(login: String): ServiceResult<User> {
-        return ServiceResult.Success(fakeUser)
+    override suspend fun getUserDetails(login: String): ServiceResult<UserDetails> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getUserRepos(login: String): ServiceResult<List<Repository>> {

@@ -80,3 +80,4 @@ For that I created a new "Fragment" ViewModel for every screen. This extra ViewM
 - I decided to move nav destination declarations to individual feature modules. This keeps the app module cleaner and enables us to expand destinations into nested graphs if needed in the future without touching the app(s).
 - While writing unit tests I considered including a assertion library but realized it might be an overkill for this task.
 - While covering `RepositorySearchViewModel` with unit tests I tweaked the implementation to cover an edge case (search called with an empty string).    
+- Introduced a new `UserDetails` domain model that includes more details about a user. This will be mapped to a UI model in our new user details screen.

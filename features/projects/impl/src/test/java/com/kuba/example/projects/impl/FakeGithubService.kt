@@ -4,6 +4,7 @@ import com.kuba.example.service.api.GithubService
 import com.kuba.example.service.api.Repository
 import com.kuba.example.service.api.ServiceResult
 import com.kuba.example.service.api.User
+import com.kuba.example.service.api.UserDetails
 
 class FakeGithubService: GithubService {
 
@@ -30,7 +31,7 @@ class FakeGithubService: GithubService {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUserDetails(login: String): ServiceResult<User> {
+    override suspend fun getUserDetails(login: String): ServiceResult<UserDetails> {
         TODO("Not yet implemented")
     }
 

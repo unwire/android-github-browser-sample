@@ -28,7 +28,7 @@ interface GithubService {
      *
      * @param login the user github handle
      */
-    suspend fun getUserDetails(login: String): ServiceResult<User>
+    suspend fun getUserDetails(login: String): ServiceResult<UserDetails>
 
     /**
      * Retrieves repositories owned by a user

@@ -4,9 +4,11 @@ import com.kuba.example.service.api.GithubService
 import com.kuba.example.service.api.Repository
 import com.kuba.example.service.api.ServiceResult
 import com.kuba.example.service.api.User
+import com.kuba.example.service.api.UserDetails
 import com.kuba.example.service.impl.data.api.GithubApi
 import com.kuba.example.service.impl.data.mapping.mapToRepository
 import com.kuba.example.service.impl.data.mapping.mapToUser
+import com.kuba.example.service.impl.data.mapping.mapToUserDetails
 import com.slack.eithernet.ApiResult
 import javax.inject.Inject
 
@@ -35,11 +37,11 @@ class RealGithubService @Inject constructor(private val githubApi: GithubApi) : 
         }
     }
 
-    override suspend fun getUserDetails(login: String): ServiceResult<User> {
+    override suspend fun getUserDetails(login: String): ServiceResult<UserDetails> {
         return when (val result =
             githubApi.getUser(login = login)) {
             is ApiResult.Success -> {
-                ServiceResult.Success(result.value.mapToUser())
+                ServiceResult.Success(result.value.mapToUserDetails())
             }
 
             is ApiResult.Failure -> result.mapToServiceResult()
