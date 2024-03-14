@@ -17,11 +17,11 @@ Below is a high-level step-by-step plan for approaching the assignment:
 - [x] Make a plan for how you want to approach every task - include an estimate for time-boxing. Include testing and documentation in the plan and the estimate
 
 ### Step 2 - Complete the main tasks
-- [ ] Complete the main tasks one by one based on the priority. Write tests and document decisions and assumptions as you go.
+- [x] Complete the main tasks one by one based on the priority. Write tests and document decisions and assumptions as you go.
     - [x] Task 1 - Navigation Framework Refactoring
     - [x] Task 2 - Implement a Fake GithubService and ViewModel unit tests
-    - [ ] Task 3 - Add a feature: User Details
-- [ ] Ensure all the requirements in the description are fulfilled before moving on to the bonus points
+    - [x] Task 3 - Add a feature: User Details
+- [x] Ensure all the requirements in the description are fulfilled before moving on to the bonus points
 
 ### Step 3 - Tackle the bonus tasks
 - [ ] If the time permits tackle the bonus tasks. Otherwise write some documentation explaining how you would have approached them
@@ -81,3 +81,6 @@ For that I created a new "Fragment" ViewModel for every screen. This extra ViewM
 - While writing unit tests I considered including a assertion library but realized it might be an overkill for this task.
 - While covering `RepositorySearchViewModel` with unit tests I tweaked the implementation to cover an edge case (search called with an empty string).    
 - Introduced a new `UserDetails` domain model that includes more details about a user. This will be mapped to a UI model in our new user details screen.
+- Decided to build the UI for user details screen in Compose to showcase my experience with it
+- Considered passing the data we have already fetched on the user (avatar, name and login) to the user details. That way user sees something some details about the user while we fetch the rest. 
+But eventually decided to load all the details and display them in one go. There is a loading state (simple spinner) the user sees in the user details screen while the data loads. 
