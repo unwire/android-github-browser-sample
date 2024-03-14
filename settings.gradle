@@ -31,3 +31,5 @@ include ':shared:service:api'
 include ':shared:service:impl'
 include ':shared:navigation:api'
 include ':shared:navigation:impl'
+
+include ':apps:pink_browser'
