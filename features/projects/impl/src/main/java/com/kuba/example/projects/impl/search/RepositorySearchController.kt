@@ -15,8 +15,6 @@ import com.kuba.example.navigation.api.ControllerFactory
 import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerRepositorySearchBinding
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
 import dagger.Binds
 import dagger.Module
@@ -39,6 +37,11 @@ class RepositorySearchController : BaseController(R.layout.controller_repository
     @Inject
     lateinit var viewModel: RepositorySearchViewModel
 
+    private lateinit var binding: ControllerRepositorySearchBinding
+    private val itemClickListener = { destination: ContributorsScreen -> navigateToContributors(destination) }
+    private val mapRepositoryToRepositoryItem by lazy { MapRepositoryToRepositoryItem(itemClickListener) }
+    private val repositorySection by lazy { Section() }
+
     override fun onContextAvailable(context: Context) {
         if (!::viewModel.isInitialized) { // prevent multiple injections on ie. configuration changes
             ConductorInjection.inject(this)
@@ -46,61 +49,9 @@ class RepositorySearchController : BaseController(R.layout.controller_repository
     }
 
     override fun onViewCreated(view: View) {
-        val binding = ControllerRepositorySearchBinding.bind(view)
+        binding = ControllerRepositorySearchBinding.bind(view)
         with(binding) {
-            // Recyclerview adapter setup
-            val adapter = GroupAdapter<GroupieViewHolder>()
-            val repositorySection = Section()
-            adapter.add(repositorySection)
-            rvRepositories.adapter = adapter
-
-
-            // Observe viewmodel state emissions
-            lifecycle.coroutineScope.launch {
-                lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                    val itemClickListener: (repoOwnerLogin: String, repoName: String, repoDescription: String?) -> Unit =
-                        { repoOwnerLogin, repoName, repoDescription ->
-                            editQuery.clearFocus() // dismiss keyboard
-                            Timber.d("Navigate to contributors... $repoOwnerLogin/$repoName")
-                            val destination = ContributorsScreen(
-                                ownerLogin = repoOwnerLogin,
-                                repoName = repoName,
-                                repoDescription = repoDescription
-                            )
-                            router.pushController(
-                                RouterTransaction
-                                        .with(controllerFactory.create(destination))
-                                        .pushChangeHandler(HorizontalChangeHandler())
-                                        .popChangeHandler(HorizontalChangeHandler())
-                            )
-                        }
-                    viewModel.state.collectLatest { uiModel ->
-
-                        when (uiModel) {
-                            is RepositoriesUiModel.Content -> {
-                                lblError.isVisible = false
-                                val items = uiModel.repositories.map {
-                                    RepositoryItem(
-                                        owner = it.ownerLogin,
-                                        name = it.name,
-                                        description = it.description,
-                                        stars = it.stars
-                                    ).apply {
-                                        onClickListener = itemClickListener
-                                    }
-                                }
-                                repositorySection.update(items)
-                            }
-
-                            is RepositoriesUiModel.Error -> {
-                                lblError.isVisible = true
-                                lblError.text = uiModel.message
-                            }
-                        }
-                    }
-                }
-            }
-
+            rvRepositories.setupAdapter(repositorySection)
             btnSearch.setOnClickListener {
                 lifecycle.coroutineScope.launch {
                     val query: String = editQuery.text.toString()
@@ -108,6 +59,40 @@ class RepositorySearchController : BaseController(R.layout.controller_repository
                 }
             }
         }
+
+        // Observe viewmodel state emissions
+        lifecycle.coroutineScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                observeRepositories()
+            }
+        }
+    }
+
+    private suspend fun observeRepositories(){
+        viewModel.state.collectLatest { uiModel ->
+            when (uiModel) {
+                is RepositoriesUiModel.Content -> {
+                    binding.lblError.isVisible = false
+                    val items = mapRepositoryToRepositoryItem.invoke(uiModel.repositories)
+                    repositorySection.update(items)
+                }
+                is RepositoriesUiModel.Error -> binding.lblError.renderError(uiModel.message)
+                // TODO: Add Loading state
+            }
+        }
+    }
+
+    private fun navigateToContributors(destination: ContributorsScreen) {
+        ContributorsScreen.extractArgs(destination.args).let {
+            Timber.d("Navigate to contributors... ${it.login}/${it.repoName}")
+        }
+        binding.editQuery.clearFocus() // dismiss keyboard
+        router.pushController(
+            RouterTransaction
+                .with(controllerFactory.create(destination))
+                .pushChangeHandler(HorizontalChangeHandler())
+                .popChangeHandler(HorizontalChangeHandler())
+        )
     }
 
     @ControllerScope(RepositorySearchController::class)

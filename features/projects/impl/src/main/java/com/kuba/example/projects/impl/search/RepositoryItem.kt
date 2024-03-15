@@ -1,6 +1,7 @@
 package com.kuba.example.projects.impl.search
 
 import android.view.View
+import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ItemRepositoryBinding
 import com.xwray.groupie.viewbinding.BindableItem
@@ -13,7 +14,7 @@ data class RepositoryItem(
     val stars: Int
 ) : BindableItem<ItemRepositoryBinding>() {
 
-    var onClickListener: ((ownerLogin: String, name: String, description: String?) -> Unit)? = null
+    var onClickListener: ((ContributorsScreen) -> Unit)? = null
 
     override fun bind(binding: ItemRepositoryBinding, position: Int) {
         with(binding) {
@@ -29,7 +30,12 @@ data class RepositoryItem(
 
             root.setOnClickListener {
                 Timber.d("Clicking repo $name owned by $owner")
-                onClickListener?.invoke(owner, name, description)
+                val destination = ContributorsScreen(
+                    ownerLogin = owner,
+                    repoName = name,
+                    repoDescription = description
+                )
+                onClickListener?.invoke(destination)
             }
         }
     }
