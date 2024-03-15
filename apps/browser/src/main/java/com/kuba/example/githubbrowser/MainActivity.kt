@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
@@ -15,10 +14,10 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.kuba.example.dagger.conductor.HasControllerInjector
 import com.kuba.example.dagger.conductor.HasControllerInjectorProvider
 import com.kuba.example.githubbrowser.databinding.ActivityMainBinding
-import com.kuba.example.githubbrowser.databinding.ControllerDummyBinding
 import com.kuba.example.navigation.api.ControllerFactory
 import com.kuba.example.navigation.api.FeatureFlagFactory
 import com.kuba.example.projects.api.navigation.RepositorySearchScreen
+import com.kuba.example.projects.impl.search.RepositorySearchFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -100,24 +99,12 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
             navHostFragment.view?.visibility = View.VISIBLE
             val navController = navHostFragment.navController
             navController.graph = navController.createGraph(
-                startDestination = TestFragment.ROUTE
+                startDestination = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE
             ) {
-                fragment<TestFragment>(route = TestFragment.ROUTE){}
+                fragment<RepositorySearchFragment>(route = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE){}
             }
         }
     }
 
     private fun isAndroidNavigationEnabled(): Boolean = featureFlagFactory.isAndroidNavigationEnabled()
-}
-
-class TestFragment : Fragment(R.layout.controller_dummy) {
-    companion object {
-        const val ROUTE = "test"
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val binding = ControllerDummyBinding.bind(view)
-        binding.lblDummyController.text = "Hello Android Navigation!"
-    }
 }
