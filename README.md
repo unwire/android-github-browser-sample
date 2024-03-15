@@ -40,9 +40,12 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
     - The app builds and runs without errors. 
     - Tested to work on Android 13 (API 33) with no issues on configuration changes.
 - [ ] Task 1: Navigation Refactoring
-  - [ ] Implement a feature flag to enable the new navigation setup
-  - [ ] Integrate a `FragmentContainerView` widget into the `activity_main.xml` layout
+  - [X] Implement a feature flag to enable the new navigation setup
+  - [X] Integrate a `FragmentContainerView` widget into the `activity_main.xml` layout
   - [ ] Refactor the navigation setup to incorporate the Android Navigation Component
+    - [ ] RepositorySearchScreen
+    - [ ] ContributorsScreen
+    - [ ] UserRepositoriesScreen
 - [ ] Task 2: Implement FakeGithubService and ViewModel tests
 - [ ] Task 3: Add User Details feature
 - [ ] Task 4: Bonus Tasks

@@ -63,6 +63,8 @@ dependencies {
 
     // Navigation
     implementation libs.conductor
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
 
     // Features
     implementation project(":features:projects:impl")
