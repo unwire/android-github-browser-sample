@@ -22,6 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Github Example"
 include ':apps:browser'
+include ':apps:riders'
 include ':features:users:api'
 include ':features:projects:api'
 include ':features:users:impl'
