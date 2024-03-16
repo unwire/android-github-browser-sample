@@ -46,8 +46,9 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
     - [X] RepositorySearchScreen
     - [X] ContributorsScreen
     - [X] UserRepositoriesScreen
-- [-] Task 2: Implement FakeGithubService and ViewModel tests
+- [X] Task 2: Implement FakeGithubService and ViewModel tests
   - [X] Implement FakeGithubService class
+  - [X] Write unit tests for RepositorySearchViewModel
 - [ ] Task 3: Add User Details feature
 - [ ] Task 4: Bonus Tasks
 - [ ] Testing and Quality Assurance
