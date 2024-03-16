@@ -1,8 +1,10 @@
 package com.kuba.example.projects.impl.search
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -40,6 +42,12 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
                     val query: String = editQuery.text.toString()
                     viewModel.search(query)
                 }
+
+                // Hide the keyboard
+                (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                    .apply {
+                        hideSoftInputFromWindow(view.windowToken, 0)
+                    }
             }
         }
 
