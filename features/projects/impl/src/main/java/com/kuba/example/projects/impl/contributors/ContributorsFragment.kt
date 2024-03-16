@@ -18,6 +18,7 @@ import com.kuba.example.projects.impl.databinding.ControllerContributorsBinding
 import com.kuba.example.projects.impl.search.renderError
 import com.kuba.example.projects.impl.search.setupAdapter
 import com.kuba.example.service.api.User
+import com.kuba.example.users.api.navigation.UserDetailsScreen
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.xwray.groupie.Section
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,10 +39,13 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = ControllerContributorsBinding.bind(view)
-        val args = requireArguments()
-        val contributorScreenArgs = ContributorsScreen.extractArgs(args)
+        val contributorScreenArgs = ContributorsScreen.extractArgs(requireArguments())
         with(binding) {
             with(contributorScreenArgs) {
+                with(lblName) {
+                    text = repoName
+                    setOnClickListener { navigateToUserDetails(contributorScreenArgs.login) }
+                }
                 lblName.text = repoName
                 lblDescription.text = repoDescription
             }
@@ -91,6 +95,13 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
         val destination = UserRepositoriesScreen(user)
         val params =  UserRepositoriesScreen.extractUser(destination.args)
         val argument = Uri.encode(Json.encodeToString(params))
+        findNavController().navigate("${destination.route}/$argument")
+    }
+
+    private fun navigateToUserDetails(login: String) {
+        Timber.d("Navigate to details for user (login)... $login")
+        val destination = UserDetailsScreen(login)
+        val argument =  UserDetailsScreen.extractArgs(destination.args)
         findNavController().navigate("${destination.route}/$argument")
     }
 }

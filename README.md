@@ -49,7 +49,14 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
 - [X] Task 2: Implement FakeGithubService and ViewModel tests
   - [X] Implement FakeGithubService class
   - [X] Write unit tests for RepositorySearchViewModel
-- [ ] Task 3: Add User Details feature
+- [X] Task 3: Add User Details feature
+  - [X] Design the User Details screen
+  - [X] Add a new Fragment for the User Details screen
+  - [X] Add navigation to the User Details screen with dummy data
+  - [X] Add Jetpack Compose dependencies
+  - [X] Add User Details screen Composable
+  - [X] Add a new ViewModel for the User Details screen
+  - [X] Connect the User Details screen to the ViewModel
 - [ ] Task 4: Bonus Tasks
 - [ ] Testing and Quality Assurance
 - [ ] Documentation

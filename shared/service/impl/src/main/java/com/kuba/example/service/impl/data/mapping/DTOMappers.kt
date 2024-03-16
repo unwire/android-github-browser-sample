@@ -6,12 +6,14 @@ import com.kuba.example.service.impl.data.api.dto.ContributorDTO
 import com.kuba.example.service.impl.data.api.dto.RepoDTO
 import com.kuba.example.service.impl.data.api.dto.UserDTO
 
-
-fun UserDTO.mapToUser(): User =
-    User(
-        login = login, name = name, avatarUrl = avatarUrl
-    )
-
+fun UserDTO.mapToUser(): User = User(
+    login = login,
+    name = name,
+    avatarUrl = avatarUrl,
+    bio = bio,
+    followers = followers,
+    following = following
+)
 
 fun RepoDTO.mapToRepository(): Repository =
     Repository(
@@ -21,7 +23,6 @@ fun RepoDTO.mapToRepository(): Repository =
         ownerLogin = owner.login,
         stars = stars
     )
-
 
 fun ContributorDTO.mapToUser() = User(
     login = login, name = null, avatarUrl = avatarUrl

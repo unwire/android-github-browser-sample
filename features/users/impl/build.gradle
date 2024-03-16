@@ -11,6 +11,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     defaultConfig {
@@ -32,6 +33,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 }
 
@@ -61,6 +65,13 @@ dependencies {
     ksp libs.dagger.hilt.compiler
     implementation libs.dagger.android.support
     ksp libs.dagger.android.compiler
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.coil.kt.compose)
 
     // Test
     testImplementation libs.junit

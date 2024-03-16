@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavType
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
@@ -21,7 +22,9 @@ import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.api.navigation.RepositorySearchScreen
 import com.kuba.example.projects.impl.contributors.ContributorsFragment
 import com.kuba.example.projects.impl.search.RepositorySearchFragment
+import com.kuba.example.users.api.navigation.UserDetailsScreen
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
+import com.kuba.example.users.impl.repos.UserDetailsFragment
 import com.kuba.example.users.impl.repos.UserRepositoriesFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.hilt.android.AndroidEntryPoint
@@ -117,6 +120,9 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
                 }
                 fragment<UserRepositoriesFragment>(route = "${UserRepositoriesScreen.USER_REPOSITORIES_ROUTE}/{${UserRepositoriesScreen.KEY_USER}}"){
                     argument(UserRepositoriesScreen.KEY_USER) { type = UserRepositoriesScreen.USER_NAV_TYPE }
+                }
+                fragment<UserDetailsFragment>(route = "${UserDetailsScreen.USER_DETAILS_REPOSITORIES_ROUTE}/{${UserDetailsScreen.KEY_USER}}"){
+                    argument(UserDetailsScreen.KEY_USER) { type = NavType.StringType}
                 }
             }
             onBackPressedDispatcher.addCallback(
