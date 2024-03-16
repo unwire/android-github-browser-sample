@@ -1,11 +1,13 @@
 package com.kuba.example.users.impl.repos
 
 import android.view.View
+import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.users.impl.R
 import com.kuba.example.users.impl.databinding.ItemRepositoryBinding
 import com.xwray.groupie.viewbinding.BindableItem
 import timber.log.Timber
 
+// TODO: Merge with RepositoryItem from projects module or extract common part to a shared module
 data class RepositoryItem(
     val owner: String,
     val name: String,
@@ -13,7 +15,7 @@ data class RepositoryItem(
     val stars: Int
 ) : BindableItem<ItemRepositoryBinding>() {
 
-    var onClickListener: ((ownerLogin: String, name: String, description: String?) -> Unit)? = null
+    var onClickListener: ((ContributorsScreen) -> Unit)? = null
 
     override fun bind(binding: ItemRepositoryBinding, position: Int) {
         with(binding) {
@@ -29,7 +31,12 @@ data class RepositoryItem(
 
             root.setOnClickListener {
                 Timber.d("Clicking repo $name owned by $owner")
-                onClickListener?.invoke(owner, name, description)
+                val contributors = ContributorsScreen(
+                    ownerLogin = owner,
+                    repoName = name,
+                    repoDescription = description
+                )
+                onClickListener?.invoke(contributors)
             }
         }
     }

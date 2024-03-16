@@ -82,19 +82,17 @@ class UserRepositoriesController(args: Bundle?) : BaseController(R.layout.contro
             // Observe viewmodel state emissions
             lifecycle.coroutineScope.launch {
                 lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                    val itemClickListener: (repoOwnerLogin: String, repoName: String, repoDescription: String?) -> Unit =
-                        { repoOwnerLogin, repoName, repoDescription ->
-                            Timber.d("Navigate to contributors... $repoOwnerLogin/$repoName")
-                            val destination = ContributorsScreen(
-                                ownerLogin = repoOwnerLogin,
-                                repoName = repoName,
-                                repoDescription = repoDescription
-                            )
+                    val itemClickListener: (ContributorsScreen) -> Unit =
+                        { contributors ->
+
+                            ContributorsScreen.extractArgs(requireNotNull(contributors.args)).let {
+                                Timber.d("Navigate to contributors... ${it.login}/${it.repoName}")
+                            }
                             router.pushController(
                                 RouterTransaction
-                                        .with(controllerFactory.create(destination))
-                                        .pushChangeHandler(HorizontalChangeHandler())
-                                        .popChangeHandler(HorizontalChangeHandler())
+                                    .with(controllerFactory.create(contributors))
+                                    .pushChangeHandler(HorizontalChangeHandler())
+                                    .popChangeHandler(HorizontalChangeHandler())
                             )
                         }
                     viewModel.state.collectLatest { uiModel ->
@@ -119,6 +117,8 @@ class UserRepositoriesController(args: Bundle?) : BaseController(R.layout.contro
                                 lblError.isVisible = true
                                 lblError.text = uiModel.message
                             }
+
+                            else -> {}
                         }
                     }
                 }

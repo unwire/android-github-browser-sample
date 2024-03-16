@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -48,6 +49,8 @@ dependencies {
     implementation libs.material
     implementation libs.timber
     implementation libs.coil
+    implementation libs.navigation.fragment.ktx
+    implementation libs.kotlinx.serialization.json
 
     // Recyclerview convenience
     implementation libs.groupie.viewbinding

@@ -20,10 +20,10 @@ class ContributorsScreen(ownerLogin: String, repoName: String, repoDescription: 
          *
          * Provide the [Bundle] set on the [Controller] to extract the [ContributorScreenArgs]
          */
-        @Deprecated("Will be deleted")
         fun extractArgs(args: Bundle) : ContributorScreenArgs = args.getParcelable(KEY_ARGS)!!
 
-        fun extractArgs(savedStateHandle: SavedStateHandle) = savedStateHandle.get<ContributorScreenArgs>(KEY_ARGS)!!
+        fun extractSavedStateHandleArgs(savedStateHandle: SavedStateHandle) = savedStateHandle.get<ContributorScreenArgs>(KEY_ARGS)!!
+
         const val KEY_ARGS = "key.args"
         const val CONTRIBUTORS_ROUTE = "repos/contributors"
         val CONTRIBUTOR_SCREEN_ARGS_TYPE = object : NavType<ContributorScreenArgs>(

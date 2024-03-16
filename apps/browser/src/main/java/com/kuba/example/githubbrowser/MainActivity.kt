@@ -21,6 +21,8 @@ import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.api.navigation.RepositorySearchScreen
 import com.kuba.example.projects.impl.contributors.ContributorsFragment
 import com.kuba.example.projects.impl.search.RepositorySearchFragment
+import com.kuba.example.users.api.navigation.UserRepositoriesScreen
+import com.kuba.example.users.impl.repos.UserRepositoriesFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -111,9 +113,10 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
             ) {
                 fragment<RepositorySearchFragment>(route = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE){}
                 fragment<ContributorsFragment>(route = "${ContributorsScreen.CONTRIBUTORS_ROUTE}/{${ContributorsScreen.KEY_ARGS}}"){
-                    argument(ContributorsScreen.KEY_ARGS){
-                        type = ContributorsScreen.CONTRIBUTOR_SCREEN_ARGS_TYPE
-                    }
+                    argument(ContributorsScreen.KEY_ARGS) { type = ContributorsScreen.CONTRIBUTOR_SCREEN_ARGS_TYPE }
+                }
+                fragment<UserRepositoriesFragment>(route = "${UserRepositoriesScreen.USER_REPOSITORIES_ROUTE}/{${UserRepositoriesScreen.KEY_USER}}"){
+                    argument(UserRepositoriesScreen.KEY_USER) { type = UserRepositoriesScreen.USER_NAV_TYPE }
                 }
             }
             onBackPressedDispatcher.addCallback(

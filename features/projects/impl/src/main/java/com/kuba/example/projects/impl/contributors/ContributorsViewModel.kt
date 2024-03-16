@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @ControllerScope(ContributorsController::class)
+@Deprecated("Will be deleted, Use ContributorsFragmentViewModel instead")
 class ContributorsViewModel @Inject constructor(
     override val contributorsScreenArgs: ContributorsScreen.ContributorScreenArgs,
     override val githubService: GithubService
@@ -22,7 +23,7 @@ class ContributorsFragmentViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     override val githubService: GithubService
 ) : BaseContributorsViewModel() {
-    override val contributorsScreenArgs get() = ContributorsScreen.extractArgs(savedStateHandle)
+    override val contributorsScreenArgs get() = ContributorsScreen.extractSavedStateHandleArgs(savedStateHandle)
 }
 
 abstract class BaseContributorsViewModel : ViewModel() {
