@@ -3,15 +3,11 @@ package com.kuba.example.projects.impl.contributors
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnClickListener
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluelinelabs.conductor.RouterTransaction
-import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import com.kuba.example.dagger.conductor.ConductorInjection
 import com.kuba.example.dagger.conductor.scope.ControllerScope
@@ -20,7 +16,6 @@ import com.kuba.example.navigation.api.ControllerFactory
 import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerContributorsBinding
-import com.kuba.example.projects.impl.databinding.ControllerRepositorySearchBinding
 import com.kuba.example.service.api.User
 import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import com.xwray.groupie.GroupAdapter
@@ -41,6 +36,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@Deprecated("Will be deleted, Use ContributorsFragment instead")
 class ContributorsController(args: Bundle?) :
     BaseController(R.layout.controller_contributors, args) {
 
@@ -107,6 +103,7 @@ class ContributorsController(args: Bundle?) :
                                 lblError.isVisible = true
                                 lblError.text = uiModel.message
                             }
+                            else -> {}
                         }
                     }
                 }

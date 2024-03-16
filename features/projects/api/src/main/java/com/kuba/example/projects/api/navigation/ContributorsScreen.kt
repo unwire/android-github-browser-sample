@@ -2,6 +2,7 @@ package com.kuba.example.projects.api.navigation
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavType
 import com.kuba.example.navigation.api.ControllerDestination
 import kotlinx.parcelize.Parcelize
@@ -16,9 +17,13 @@ class ContributorsScreen(ownerLogin: String, repoName: String, repoDescription: 
 
     companion object {
         /**
+         *
          * Provide the [Bundle] set on the [Controller] to extract the [ContributorScreenArgs]
          */
+        @Deprecated("Will be deleted")
         fun extractArgs(args: Bundle) : ContributorScreenArgs = args.getParcelable(KEY_ARGS)!!
+
+        fun extractArgs(savedStateHandle: SavedStateHandle) = savedStateHandle.get<ContributorScreenArgs>(KEY_ARGS)!!
         const val KEY_ARGS = "key.args"
         const val CONTRIBUTORS_ROUTE = "repos/contributors"
         val CONTRIBUTOR_SCREEN_ARGS_TYPE = object : NavType<ContributorScreenArgs>(
