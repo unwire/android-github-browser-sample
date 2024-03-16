@@ -73,6 +73,7 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
         viewModel.state.collectLatest { uiModel ->
             when (uiModel) {
                 is ContributorsUiModel.Content -> {
+                    binding.indeterminateBar.isVisible = false
                     binding.rvContributors.isVisible = true
                     binding.lblError.isVisible = false
                     val items = uiModel.repositories.map { user ->
@@ -82,9 +83,14 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
                 }
                 is ContributorsUiModel.Error -> {
                     binding.lblError.renderError(uiModel.message)
+                    binding.indeterminateBar.isVisible = false
                     binding.rvContributors.isVisible = false
                 }
-                ContributorsUiModel.Loading -> {  }// TODO: Add Loading state
+                ContributorsUiModel.Loading -> {
+                    binding.indeterminateBar.isVisible = true
+                    binding.lblError.isVisible = false
+                    binding.rvContributors.isVisible = false
+                }
                 ContributorsUiModel.Idle -> { /* no-op */ }
             }
         }

@@ -76,6 +76,7 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
         viewModel.state.collectLatest { uiModel ->
             when (uiModel) {
                 is UserRepositoriesUiModel.Content -> {
+                    binding.indeterminateBar.isVisible = false
                     binding.rvRepositories.isVisible = true
                     binding.lblError.isVisible = false
                     val items = uiModel.repositories.map {
@@ -89,7 +90,6 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                         }
                     }
                     repositorySection.update(items)
-                    repositorySection.update(items) // TODO: Handle empty state
                 }
                 is UserRepositoriesUiModel.Error -> {
                     with(binding.lblError) {
@@ -97,8 +97,13 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                         text = uiModel.message
                     }
                     binding.rvRepositories.isVisible = false
+                    binding.indeterminateBar.isVisible = false
                 }
-                UserRepositoriesUiModel.Loading -> {  }// TODO: Add Loading state
+                UserRepositoriesUiModel.Loading -> {
+                    binding.indeterminateBar.isVisible = true
+                    binding.lblError.isVisible = false
+                    binding.rvRepositories.isVisible = false
+                }
                 UserRepositoriesUiModel.Idle -> { /* no-op */ }
             }
         }

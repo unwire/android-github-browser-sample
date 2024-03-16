@@ -9,6 +9,7 @@ import com.kuba.example.service.api.ServiceResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @ControllerScope(ContributorsController::class)
@@ -38,11 +39,15 @@ abstract class BaseContributorsViewModel : ViewModel() {
      * Search Github repositories
      */
     suspend fun loadContributors() {
-        val uiModel = when (val result = githubService.getContributors(contributorsScreenArgs.login, contributorsScreenArgs.repoName)) {
-            is ServiceResult.Success -> ContributorsUiModel.Content(result.value)
-            is ServiceResult.Failure -> ContributorsUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+        flow {
+            emit(ContributorsUiModel.Loading)
+            val uiModel = when (val result = githubService.getContributors(contributorsScreenArgs.login, contributorsScreenArgs.repoName)) {
+                is ServiceResult.Success -> ContributorsUiModel.Content(result.value)
+                is ServiceResult.Failure -> ContributorsUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+            }
+            emit(uiModel)
+        }.collect{
+            _state.value = it
         }
-
-        _state.value = uiModel
     }
 }

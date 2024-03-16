@@ -60,7 +60,7 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
 - [ ] Task 4: Bonus Tasks
   - [ ] Improve the UI/UX of the app
     - [X] Add AppBar title and back button where necessary
-    - [ ] Add a loading indicator when fetching data
+    - [X] Add a loading indicator when fetching data
     - [ ] Dismiss the keyboard when the search button is pressed
     - [ ] Fix error message edge cases when search input is empty or invalid
     - [ ] Add AppBar title and back button where necessary

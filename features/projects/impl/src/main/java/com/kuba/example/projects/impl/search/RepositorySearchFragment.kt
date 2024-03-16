@@ -59,16 +59,22 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
         viewModel.state.collectLatest { uiModel ->
             when (uiModel) {
                 is RepositoriesUiModel.Content -> {
-                    binding.rvRepositories.isVisible = true
+                    binding.indeterminateBar.isVisible = false
                     binding.lblError.isVisible = false
+                    binding.rvRepositories.isVisible = true
                     val items = mapRepositoryToRepositoryItem.invoke(uiModel.repositories)
                     repositorySection.update(items) // TODO: Handle empty state
                 }
                 is RepositoriesUiModel.Error -> {
+                    binding.rvRepositories.isVisible = false
+                    binding.indeterminateBar.isVisible = false
                     binding.lblError.renderError(uiModel.message)
+                }
+                RepositoriesUiModel.Loading -> {
+                    binding.indeterminateBar.isVisible = true
+                    binding.lblError.isVisible = false
                     binding.rvRepositories.isVisible = false
                 }
-                RepositoriesUiModel.Loading -> {  }// TODO: Add Loading state
                 RepositoriesUiModel.Idle -> { /* no-op */ }
             }
         }

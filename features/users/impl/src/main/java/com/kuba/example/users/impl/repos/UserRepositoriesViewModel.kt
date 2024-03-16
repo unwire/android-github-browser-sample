@@ -10,6 +10,7 @@ import com.kuba.example.users.api.navigation.UserRepositoriesScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @Deprecated("Will be deleted, Use UserRepositoriesFragmentViewModel instead")
@@ -39,10 +40,15 @@ abstract class BaseContributorsViewModel : ViewModel() {
      * Search Github repositories
      */
     suspend fun loadRepositories() {
-        val uiModel = when (val result = githubService.getUserRepos(user.login)) {
-            is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value)
-            is ServiceResult.Failure -> UserRepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+        flow {
+            emit(UserRepositoriesUiModel.Loading)
+            val uiModel = when (val result = githubService.getUserRepos(user.login)) {
+                is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value)
+                is ServiceResult.Failure -> UserRepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+            }
+            emit(uiModel)
+        }.collect {
+            _state.value = it
         }
-        _state.value = uiModel
     }
 }
