@@ -9,6 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
         Timber.d("onCreate, savedInstanceState: $savedInstanceState")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         if (isAndroidNavigationEnabled()) {
             binding.setupAndroidNavigation()
@@ -114,15 +116,20 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
             navController.graph = navController.createGraph(
                 startDestination = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE
             ) {
-                fragment<RepositorySearchFragment>(route = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE){}
+                fragment<RepositorySearchFragment>(route = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE){
+                    label = context.getString(R.string.search_repositories)
+                }
                 fragment<ContributorsFragment>(route = "${ContributorsScreen.CONTRIBUTORS_ROUTE}/{${ContributorsScreen.KEY_ARGS}}"){
                     argument(ContributorsScreen.KEY_ARGS) { type = ContributorsScreen.CONTRIBUTOR_SCREEN_ARGS_TYPE }
+                    label = context.getString(R.string.contributors)
                 }
                 fragment<UserRepositoriesFragment>(route = "${UserRepositoriesScreen.USER_REPOSITORIES_ROUTE}/{${UserRepositoriesScreen.KEY_USER}}"){
                     argument(UserRepositoriesScreen.KEY_USER) { type = UserRepositoriesScreen.USER_NAV_TYPE }
+                    label = context.getString(R.string.user_repositories)
                 }
                 fragment<UserDetailsFragment>(route = "${UserDetailsScreen.USER_DETAILS_REPOSITORIES_ROUTE}/{${UserDetailsScreen.KEY_USER}}"){
                     argument(UserDetailsScreen.KEY_USER) { type = NavType.StringType}
+                    label = context.getString(R.string.user_details)
                 }
             }
             onBackPressedDispatcher.addCallback(
@@ -135,6 +142,8 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
                     }
                 }
             )
+            val appBarConfiguration = AppBarConfiguration(navController.graph)
+            binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         }
     }
 

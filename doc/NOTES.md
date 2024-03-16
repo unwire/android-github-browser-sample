@@ -18,3 +18,6 @@ I added the `FakeGithubService` to the `:shared:service:imp` module, maintaining
 For the ViewModel testing task, I focused on testing the `RepositorySearchFragmentViewModel`. I tested the `RepositorySearchFragmentViewModel` extensively in a new `RepositorySearchFragmentViewModelTest` file. Using JUnit's parameterized testing, I covered various scenarios to ensure thorough validation.
 
 Note that the `FakeGithubService` class became a test dependency for the `RepositorySearchFragmentViewModelTest` class, exposing the `:shared:service:impl` module. This intentional decision was made to also test the `FakeGithubService` within the app. Although this approach is considered an anti-pattern and not recommended, I wanted to explain my rationale. In a real-world scenario, the `FakeGithubService` would ideally reside within the module where it's tested or in a shared testing module.
+
+### User Details Feature
+To demonstrate my proficiency in Android Jetpack Compose, I've chosen to implement the User Details screen in Compose, adhering to best practices like state-hoisting. This decision reflects a commitment to modern Android development standards. 

@@ -58,6 +58,13 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
   - [X] Add a new ViewModel for the User Details screen
   - [X] Connect the User Details screen to the ViewModel
 - [ ] Task 4: Bonus Tasks
+  - [ ] Improve the UI/UX of the app
+    - [X] Add AppBar title and back button where necessary
+    - [ ] Add a loading indicator when fetching data
+    - [ ] Dismiss the keyboard when the search button is pressed
+    - [ ] Fix error message edge cases when search input is empty or invalid
+    - [ ] Add AppBar title and back button where necessary
+    - [ ] Fix CardView padding and margins
 - [ ] Testing and Quality Assurance
 - [ ] Documentation
 - [ ] Submit the Pull Request
