@@ -1,5 +1,6 @@
 package com.kuba.example.projects.impl.search
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -8,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerRepositorySearchBinding
@@ -15,6 +17,8 @@ import com.xwray.groupie.Section
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -69,9 +73,12 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
             }
         }
     }
+
     private fun navigateToContributors(destination: ContributorsScreen) {
         ContributorsScreen.extractArgs(destination.args).let {
             Timber.d("Navigate to contributors... ${it.login}/${it.repoName}")
+            val argument = Uri.encode(Json.encodeToString(it))
+            findNavController().navigate("${destination.route}/$argument")
         }
     }
 }

@@ -64,6 +64,8 @@ dependencies {
     // Navigation
     implementation libs.navigation.fragment.ktx
 
+    // Other
+    implementation libs.kotlinx.serialization.json
 
     // Test
     testImplementation libs.junit

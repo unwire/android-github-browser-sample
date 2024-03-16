@@ -2,6 +2,7 @@ package com.kuba.example.githubbrowser
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.createGraph
@@ -16,7 +17,9 @@ import com.kuba.example.dagger.conductor.HasControllerInjectorProvider
 import com.kuba.example.githubbrowser.databinding.ActivityMainBinding
 import com.kuba.example.navigation.api.ControllerFactory
 import com.kuba.example.navigation.api.FeatureFlagFactory
+import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.api.navigation.RepositorySearchScreen
+import com.kuba.example.projects.impl.contributors.ContributorsFragment
 import com.kuba.example.projects.impl.search.RepositorySearchFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,6 +71,10 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
 
     @CallSuper
     override fun onBackPressed() {
+        if (isAndroidNavigationEnabled()) {
+            super.onBackPressed()
+            return
+        }
         if (router != null) {
             // must delegate BACK press to routers
             if (!router!!.handleBack()) {
@@ -103,7 +110,22 @@ class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerIn
                 startDestination = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE
             ) {
                 fragment<RepositorySearchFragment>(route = RepositorySearchScreen.SEARCH_REPOSITORY_ROUTE){}
+                fragment<ContributorsFragment>(route = "${ContributorsScreen.CONTRIBUTORS_ROUTE}/{${ContributorsScreen.KEY_ARGS}}"){
+                    argument(ContributorsScreen.KEY_ARGS){
+                        type = ContributorsScreen.CONTRIBUTOR_SCREEN_ARGS_TYPE
+                    }
+                }
             }
+            onBackPressedDispatcher.addCallback(
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        if (!navController.popBackStack()) {
+                            this.isEnabled = false
+                            onBackPressed()
+                        }
+                    }
+                }
+            )
         }
     }
 
