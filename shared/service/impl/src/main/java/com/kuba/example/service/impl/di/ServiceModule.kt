@@ -1,6 +1,7 @@
 package com.kuba.example.service.impl.di
 
 import com.kuba.example.service.api.GithubService
+import com.kuba.example.service.impl.FakeGithubService
 import com.kuba.example.service.impl.RealGithubService
 import com.kuba.example.service.impl.data.api.GithubApi
 import com.slack.eithernet.ApiResultCallAdapterFactory
@@ -22,7 +23,7 @@ import javax.inject.Singleton
 interface ServiceModule {
 
     @Binds
-    fun provideGithubService(real: RealGithubService) : GithubService
+    fun provideGithubService(real: FakeGithubService) : GithubService
 
     companion object {
 
