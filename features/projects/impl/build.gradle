@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -39,7 +40,7 @@ dependencies {
     api project(":features:users:api")
     implementation project(":shared:service:api")
     implementation project(":shared:navigation:api")
-    implementation project(":shared:dagger-conductor")
+    implementation project(":shared:dagger-conductor") // TODO: Remove when Conductor is replaced with Navigation
 
     // Recyclerview convenience
     implementation libs.groupie.viewbinding
@@ -59,6 +60,9 @@ dependencies {
     ksp libs.dagger.hilt.compiler
     implementation libs.dagger.android
     ksp libs.dagger.android.compiler
+
+    // Navigation
+    implementation libs.navigation.fragment.ktx
 
 
     // Test

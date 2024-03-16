@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
+// TODO: remove HasControllerInjectorProvider & HasControllerInjector when all controllers are migrated to Android Navigation
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), HasControllerInjector, HasControllerInjectorProvider {
     private lateinit var binding: ActivityMainBinding

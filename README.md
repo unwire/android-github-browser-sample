@@ -43,7 +43,7 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
   - [X] Implement a feature flag to enable the new navigation setup
   - [X] Integrate a `FragmentContainerView` widget into the `activity_main.xml` layout
   - [ ] Refactor the navigation setup to incorporate the Android Navigation Component
-    - [ ] RepositorySearchScreen
+    - [X] RepositorySearchScreen
     - [ ] ContributorsScreen
     - [ ] UserRepositoriesScreen
 - [ ] Task 2: Implement FakeGithubService and ViewModel tests

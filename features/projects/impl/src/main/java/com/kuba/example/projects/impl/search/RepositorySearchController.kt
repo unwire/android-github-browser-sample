@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@Deprecated("Will be removed, use RepositorySearchFragment instead")
 class RepositorySearchController : BaseController(R.layout.controller_repository_search) {
 
     @Inject
@@ -77,7 +78,8 @@ class RepositorySearchController : BaseController(R.layout.controller_repository
                     repositorySection.update(items)
                 }
                 is RepositoriesUiModel.Error -> binding.lblError.renderError(uiModel.message)
-                // TODO: Add Loading state
+                RepositoriesUiModel.Idle -> { /* no-op */ }
+                RepositoriesUiModel.Loading -> {}
             }
         }
     }
