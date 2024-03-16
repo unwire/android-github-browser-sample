@@ -39,10 +39,10 @@ But to serve as a foundation for exploring ways to extend, improve and refactor 
   - [X] Ensure the project can be compiled and run without errors
     - The app builds and runs without errors. 
     - Tested to work on Android 13 (API 33) with no issues on configuration changes.
-- [ ] Task 1: Navigation Refactoring
+- [X] Task 1: Navigation Refactoring
   - [X] Implement a feature flag to enable the new navigation setup
   - [X] Integrate a `FragmentContainerView` widget into the `activity_main.xml` layout
-  - [ ] Refactor the navigation setup to incorporate the Android Navigation Component
+  - [X] Refactor the navigation setup to incorporate the Android Navigation Component
     - [X] RepositorySearchScreen
     - [X] ContributorsScreen
     - [X] UserRepositoriesScreen
