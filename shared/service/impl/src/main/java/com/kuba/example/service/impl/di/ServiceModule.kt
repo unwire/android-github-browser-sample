@@ -1,8 +1,8 @@
 package com.kuba.example.service.impl.di
 
 import com.kuba.example.service.api.GithubService
+import com.kuba.example.service.impl.FailureProvider
 import com.kuba.example.service.impl.FakeGithubService
-import com.kuba.example.service.impl.RealGithubService
 import com.kuba.example.service.impl.data.api.GithubApi
 import com.slack.eithernet.ApiResultCallAdapterFactory
 import com.slack.eithernet.ApiResultConverterFactory
@@ -50,5 +50,9 @@ interface ServiceModule {
                     .build()
                     .create(GithubApi::class.java)
         }
+
+        @Singleton
+        @Provides
+        fun providerFailureProvider(): FailureProvider = object : FailureProvider { override val forceFailure: Boolean = false }
     }
 }

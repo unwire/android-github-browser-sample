@@ -71,4 +71,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+    testImplementation libs.coroutines.test
+    // This is a test dependency for the FakeGithubService implementation. I could have used a mock, but I wanted to show how to use a fake implementation.
+    testImplementation project(':shared:service:impl')
 }

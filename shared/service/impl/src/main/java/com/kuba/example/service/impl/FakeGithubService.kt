@@ -8,16 +8,18 @@ import kotlinx.coroutines.delay
 import java.util.Random
 import javax.inject.Inject
 
-class FakeGithubService @Inject constructor() : GithubService {
+class FakeGithubService @Inject constructor(
+    private val failureProvider: FailureProvider,
+) : GithubService {
 
     override suspend fun searchRepos(
         query: String
     ): ServiceResult<List<Repository>> {
         delay(500) // Simulate network delay
-
-        // Simulate random network error
-        random.nextInt(7).let {
-            if (it < 3) return ServiceResult.Failure(reason = "Network error, please try again later.")
+        failureProvider.let {
+            if (it.forceFailure) {
+                return ServiceResult.Failure(reason = "Network error, please try again later.")
+            }
         }
         return ServiceResult.Success(fakeRepositories)
     }
@@ -76,7 +78,7 @@ class FakeGithubService @Inject constructor() : GithubService {
             ownerLogin = "other",
             stars = 0
         )
-        private val fakeRepositories = listOf(fakeRepository1, fakeRepository2, fakeRepository3)
+        val fakeRepositories = listOf(fakeRepository1, fakeRepository2, fakeRepository3)
         private val fakeContributors = listOf(fakeUser1, fakeUser2, fakeUser3)
         private val random: Random = Random()
     }
