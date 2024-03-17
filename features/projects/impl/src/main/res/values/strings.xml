@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_repositories_found">No repositories found.</string>
+    <string name="no_contributors_found">No contributors found</string>
+</resources>

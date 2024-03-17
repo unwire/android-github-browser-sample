@@ -27,7 +27,7 @@ class FakeGithubService @Inject constructor(
     override suspend fun getContributors(
         login: String,
         repositoryName: String
-    ): ServiceResult<List<User>> = fakeContributors
+    ): ServiceResult<List<User>?> = fakeContributors
         .take(random.nextInt(fakeContributors.size))
         .let { return ServiceResult.Success(it) }
 
@@ -37,7 +37,7 @@ class FakeGithubService @Inject constructor(
 
     override suspend fun getUserRepos(
         login: String
-    ): ServiceResult<List<Repository>> = fakeRepositories
+    ): ServiceResult<List<Repository>?> = fakeRepositories
         .take(random.nextInt(fakeRepositories.size))
         .let { return ServiceResult.Success(it) }
 

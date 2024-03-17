@@ -2,4 +2,5 @@
 <resources>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="no_repositories_found">No repositories found</string>
 </resources>

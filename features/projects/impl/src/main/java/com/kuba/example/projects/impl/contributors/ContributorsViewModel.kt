@@ -41,8 +41,11 @@ abstract class BaseContributorsViewModel : ViewModel() {
     suspend fun loadContributors() {
         flow {
             emit(ContributorsUiModel.Loading)
-            val uiModel = when (val result = githubService.getContributors(contributorsScreenArgs.login, contributorsScreenArgs.repoName)) {
-                is ServiceResult.Success -> ContributorsUiModel.Content(result.value)
+            val uiModel = when (val result = githubService.getContributors(
+                login = contributorsScreenArgs.login,
+                repositoryName = contributorsScreenArgs.repoName)
+            ) {
+                is ServiceResult.Success -> ContributorsUiModel.Content(result.value ?: emptyList())
                 is ServiceResult.Failure -> ContributorsUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
             }
             emit(uiModel)

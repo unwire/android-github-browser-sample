@@ -77,7 +77,7 @@ class RepositorySearchController : BaseController(R.layout.controller_repository
                     val items = mapRepositoryToRepositoryItem.invoke(uiModel.repositories)
                     repositorySection.update(items)
                 }
-                is RepositoriesUiModel.Error -> binding.lblError.renderError(uiModel.message)
+                is RepositoriesUiModel.Error -> binding.lblError.renderMessage(uiModel.message)
                 RepositoriesUiModel.Idle -> { /* no-op */ }
                 RepositoriesUiModel.Loading -> {}
             }

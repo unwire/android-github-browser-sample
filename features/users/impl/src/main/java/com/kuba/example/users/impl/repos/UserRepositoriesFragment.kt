@@ -77,8 +77,6 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
             when (uiModel) {
                 is UserRepositoriesUiModel.Content -> {
                     binding.indeterminateBar.isVisible = false
-                    binding.rvRepositories.isVisible = true
-                    binding.lblError.isVisible = false
                     val items = uiModel.repositories.map {
                         RepositoryItem(
                             owner = it.ownerLogin,
@@ -89,15 +87,24 @@ class UserRepositoriesFragment : Fragment(R.layout.controller_user_repositories)
                             onClickListener = itemClickListener
                         }
                     }
-                    repositorySection.update(items)
+
+                    if (items.isEmpty()) {
+                        binding.rvRepositories.isVisible = false
+                        binding.lblError.text = (getString(R.string.no_repositories_found))
+                        binding.lblError.isVisible = true
+                    } else {
+                        binding.lblError.isVisible = false
+                        repositorySection.update(items)
+                        binding.rvRepositories.isVisible = true
+                    }
                 }
                 is UserRepositoriesUiModel.Error -> {
+                    binding.rvRepositories.isVisible = false
+                    binding.indeterminateBar.isVisible = false
                     with(binding.lblError) {
                         isVisible = true
                         text = uiModel.message
                     }
-                    binding.rvRepositories.isVisible = false
-                    binding.indeterminateBar.isVisible = false
                 }
                 UserRepositoriesUiModel.Loading -> {
                     binding.indeterminateBar.isVisible = true

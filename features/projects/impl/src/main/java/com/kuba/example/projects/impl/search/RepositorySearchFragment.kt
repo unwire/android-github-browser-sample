@@ -68,15 +68,20 @@ class RepositorySearchFragment : Fragment(R.layout.controller_repository_search)
             when (uiModel) {
                 is RepositoriesUiModel.Content -> {
                     binding.indeterminateBar.isVisible = false
-                    binding.lblError.isVisible = false
-                    binding.rvRepositories.isVisible = true
                     val items = mapRepositoryToRepositoryItem.invoke(uiModel.repositories)
-                    repositorySection.update(items) // TODO: Handle empty state
+                    if (items.isEmpty()) {
+                        binding.rvRepositories.isVisible = false
+                        binding.lblError.renderMessage(getString(R.string.no_repositories_found))
+                    } else {
+                        binding.lblError.isVisible = false
+                        repositorySection.update(items)
+                        binding.rvRepositories.isVisible = true
+                    }
                 }
                 is RepositoriesUiModel.Error -> {
                     binding.rvRepositories.isVisible = false
                     binding.indeterminateBar.isVisible = false
-                    binding.lblError.renderError(uiModel.message)
+                    binding.lblError.renderMessage(uiModel.message)
                 }
                 RepositoriesUiModel.Loading -> {
                     binding.indeterminateBar.isVisible = true

@@ -7,7 +7,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
 
-fun TextView.renderError(message: String) {
+fun TextView.renderMessage(message: String) {
     isVisible = true
     text = message
 }

@@ -21,7 +21,7 @@ interface GithubService {
     suspend fun getContributors(
         login: String,
         repositoryName: String
-    ): ServiceResult<List<User>>
+    ): ServiceResult<List<User>?>
 
     /**
      * Retrieves user information
@@ -35,7 +35,7 @@ interface GithubService {
      *
      * @param login the user github handle
      */
-    suspend fun getUserRepos(login: String): ServiceResult<List<Repository>>
+    suspend fun getUserRepos(login: String): ServiceResult<List<Repository>?>
 }
 
 /**

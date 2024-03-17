@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.kuba.example.projects.api.navigation.ContributorsScreen
 import com.kuba.example.projects.impl.R
 import com.kuba.example.projects.impl.databinding.ControllerContributorsBinding
-import com.kuba.example.projects.impl.search.renderError
+import com.kuba.example.projects.impl.search.renderMessage
 import com.kuba.example.projects.impl.search.setupAdapter
 import com.kuba.example.service.api.User
 import com.kuba.example.users.api.navigation.UserDetailsScreen
@@ -74,15 +74,21 @@ class ContributorsFragment : Fragment(R.layout.controller_contributors) {
             when (uiModel) {
                 is ContributorsUiModel.Content -> {
                     binding.indeterminateBar.isVisible = false
-                    binding.rvContributors.isVisible = true
-                    binding.lblError.isVisible = false
                     val items = uiModel.repositories.map { user ->
                         UserItem(user).apply { onClickListener = itemClickListener }
                     }
-                    repositorySection.update(items) // TODO: Handle empty state
+                    if (items.isEmpty()) {
+                        binding.rvContributors.isVisible = false
+                        binding.lblError.text = getString(R.string.no_contributors_found)
+                        binding.lblError.isVisible = true
+                    } else {
+                        binding.lblError.isVisible = false
+                        repositorySection.update(items)
+                        binding.rvContributors.isVisible = true
+                    }
                 }
                 is ContributorsUiModel.Error -> {
-                    binding.lblError.renderError(uiModel.message)
+                    binding.lblError.renderMessage(uiModel.message)
                     binding.indeterminateBar.isVisible = false
                     binding.rvContributors.isVisible = false
                 }

@@ -43,7 +43,7 @@ abstract class BaseContributorsViewModel : ViewModel() {
         flow {
             emit(UserRepositoriesUiModel.Loading)
             val uiModel = when (val result = githubService.getUserRepos(user.login)) {
-                is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value)
+                is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value ?: emptyList())
                 is ServiceResult.Failure -> UserRepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
             }
             emit(uiModel)
