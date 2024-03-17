@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">riders</string>
+    <string name="app_name">Riders</string>
+    <string name="search_repositories">Search Repositories</string>
+    <string name="contributors">Contributors</string>
+    <string name="user_repositories">User Repositories</string>
+    <string name="user_details">User Details</string>
 </resources>
