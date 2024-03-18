@@ -4,7 +4,8 @@ import com.kuba.example.service.api.GithubService
 import com.kuba.example.service.api.Repository
 import com.kuba.example.service.api.ServiceResult
 import com.kuba.example.service.api.User
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.util.Random
 import javax.inject.Inject
 
@@ -12,16 +13,21 @@ class FakeGithubService @Inject constructor(
     private val failureProvider: FailureProvider,
 ) : GithubService {
 
-    override suspend fun searchRepos(
+    override fun searchRepos(
         query: String
-    ): ServiceResult<List<Repository>> {
-        delay(500) // Simulate network delay
+    ): Flow<ServiceResult<List<Repository>>> = flow {
+        if (query.isBlank()) {
+            emit(ServiceResult.Failure("Search query cannot be empty"))
+            return@flow
+        }
+        emit(ServiceResult.Loading)
         failureProvider.let {
             if (it.forceFailure) {
-                return ServiceResult.Failure(reason = "Network error, please try again later.")
+                emit(ServiceResult.Failure("Network error, please try again later."))
+                return@flow
             }
         }
-        return ServiceResult.Success(fakeRepositories)
+        emit(ServiceResult.Success(fakeRepositories))
     }
 
     override suspend fun getContributors(

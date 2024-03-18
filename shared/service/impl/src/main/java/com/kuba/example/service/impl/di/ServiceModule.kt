@@ -1,15 +1,19 @@
 package com.kuba.example.service.impl.di
 
+import android.content.Context
+import androidx.room.Room
 import com.kuba.example.service.api.GithubService
 import com.kuba.example.service.impl.FailureProvider
 import com.kuba.example.service.impl.RealGithubService
 import com.kuba.example.service.impl.data.api.GithubApi
+import com.kuba.example.service.impl.data.db.GithuberDatabase
 import com.slack.eithernet.ApiResultCallAdapterFactory
 import com.slack.eithernet.ApiResultConverterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,5 +58,21 @@ interface ServiceModule {
         @Singleton
         @Provides
         fun providerFailureProvider(): FailureProvider = object : FailureProvider { override val forceFailure: Boolean = false }
+
+        @Singleton
+        @Provides
+        fun provideDatabase(@ApplicationContext context: Context): GithuberDatabase {
+            return Room.databaseBuilder(
+                context = context,
+                klass = GithuberDatabase::class.java,
+                name = GithuberDatabase.DATABASE_NAME
+            )
+                .fallbackToDestructiveMigration()
+                .build()
+        }
+
+        @Singleton
+        @Provides
+        fun provideRepositoryItemDao(database: GithuberDatabase) = database.repositoryItemDao()
     }
 }

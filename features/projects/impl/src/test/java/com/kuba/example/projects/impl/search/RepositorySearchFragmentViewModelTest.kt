@@ -44,13 +44,13 @@ class RepositorySearchFragmentViewModelTest(
             FAILURE(
                 githubService = FakeGithubService(providerFailureProvider(true)),
                 thenBlock = { state ->
-                    assert((state as RepositoriesUiModel.Error).message == "Error: Network error, please try again later.")
+                    assert((state as RepositoriesUiModel.Error).message == "Network error, please try again later.")
                 }
             ),
             ERROR(
                 query = " ",
                 thenBlock = { state ->
-                    assert((state as RepositoriesUiModel.Error).message == "Please enter a search query")
+                    assert((state as RepositoriesUiModel.Error).message == "Search query cannot be empty")
                 }
             ),
             CONTENT(

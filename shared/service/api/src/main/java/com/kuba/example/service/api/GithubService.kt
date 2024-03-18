@@ -1,5 +1,7 @@
 package com.kuba.example.service.api
 
+import kotlinx.coroutines.flow.Flow
+
 /**
  * A service interface for GitHub
  */
@@ -10,7 +12,7 @@ interface GithubService {
      *
      * @param query The search query
      */
-    suspend fun searchRepos(query: String): ServiceResult<List<Repository>>
+    fun searchRepos(query: String): Flow<ServiceResult<List<Repository>>>
 
     /**
      * Retrieve contributes for a given [repository id][Repository.id]
@@ -41,7 +43,8 @@ interface GithubService {
 /**
  * Outcome of a service call
  */
-sealed interface ServiceResult<T> {
+sealed interface ServiceResult<out T> {
+    data object Loading : ServiceResult<Nothing>
     data class Success<T>(val value: T) : ServiceResult<T>
     data class Failure<T>(val reason: String?, val throwable: Throwable? = null) : ServiceResult<T>
 }

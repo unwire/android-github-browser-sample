@@ -40,15 +40,11 @@ abstract class BaseContributorsViewModel : ViewModel() {
      * Search Github repositories
      */
     suspend fun loadRepositories() {
-        flow {
-            emit(UserRepositoriesUiModel.Loading)
-            val uiModel = when (val result = githubService.getUserRepos(user.login)) {
-                is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value ?: emptyList())
-                is ServiceResult.Failure -> UserRepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
-            }
-            emit(uiModel)
-        }.collect {
-            _state.value = it
+        val uiModel = when (val result = githubService.getUserRepos(user.login)) {
+            is ServiceResult.Success -> UserRepositoriesUiModel.Content(result.value ?: emptyList())
+            is ServiceResult.Failure -> UserRepositoriesUiModel.Error("Error: ${result.reason ?: result.throwable?.message ?: "unknown"}")
+            ServiceResult.Loading -> UserRepositoriesUiModel.Loading
         }
+        _state.value = uiModel
     }
 }

@@ -52,6 +52,11 @@ dependencies {
     implementation libs.moshi
     ksp libs.moshi.kotlin.codegen
 
+    // Room
+    implementation libs.androidx.room.runtime
+    ksp libs.androidx.room.compiler
+    implementation libs.androidx.room.ktx
+
     // Test
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
